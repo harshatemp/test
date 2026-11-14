@@ -1,0 +1,532 @@
+
+# MP Runtime Skill File V2
+
+## Status
+Version 2 (Expanded Command Inventory)
+
+## Purpose
+Knowledge base for interpreting MP wrapper scripts, runtime topology, command definitions, parameters, and conversion relevance.
+
+# Runtime Administration Commands
+
+## mp job <jobname>
+Purpose: Create a job container and store subsequent MP definitions.
+Parameters:
+- jobname
+
+## mp reset
+Purpose: Reset stored job definitions.
+
+## mp show
+Purpose: Display stored definitions.
+
+## mp check
+Purpose: Validate stored definitions.
+
+## mp comment <text>
+Purpose: Add documentation comments.
+
+## mp run
+Reporting Parameters:
+- -report verbose-errors
+- -report expanded-graph
+- -report flows
+- -report table-flows
+- -report file-percentages
+- -report times
+- -report spillage
+- -report totals
+- -report skew
+- -report scroll
+- -report file
+- -report interval
+- -report show-folding
+Purpose: Runtime reporting and execution.
+
+# Definition Commands
+
+## mp file / ifile / ofile / iofile
+Parameters:
+- name
+- url
+- -flags
+- -mode
+- -create-directories
+- -format
+- -xmf
+- -rxmf
+- -xmf_type
+- -hadoop-codec
+Purpose: Logical file definitions.
+
+## mp layout
+Forms:
+- layout name partition...
+- layout name -hosts hostname...
+Purpose: Execution topology definition.
+
+## mp metadata
+Forms:
+- metadata name -file filename
+- metadata name -string value
+- -family
+Purpose: Schema definition.
+
+## mp include
+Purpose: Include DML/XFR files.
+
+## mp error
+Purpose: Error routing definition.
+
+# Port Commands
+
+## mp add-port
+Purpose: Add port definitions.
+
+## mp port
+Purpose: Port mapping.
+
+# Macro Commands
+
+## mp begin-macro
+## mp end-macro
+Purpose: Macro graph boundaries.
+
+# Execution Control
+
+## mp phase <name>
+Purpose: Execution sequencing.
+
+## mp checkpoint <name>
+Purpose: Restart/recovery checkpoint.
+
+# Flow Commands
+
+Common Parameters:
+- -metadata
+- -mode
+- -breakable
+- -encrypted
+- -compressed
+- -flush
+- -stages
+- -buffer
+
+Commands:
+- straight-flow
+- fan-in-flow
+- fan-out-flow
+- all-to-all-flow
+- fan-into-ply0-flow
+- fan-outof-ply0-flow
+- adaptive-flow
+
+Purpose: Component connectivity and data movement.
+
+# Partition Commands
+
+## range-partition
+Parameters:
+- collate
+- -stages
+- -layout
+
+## roundrobin-partition
+Parameters:
+- blocksize
+- -stages
+- -layout
+
+## hash-partition
+Parameters:
+- collate
+- -stages
+- -layout
+
+## function-partition
+Parameters:
+- function
+- -package
+- -limit
+- -ramp
+- -log
+- -layout
+
+## load-level-partition
+Parameters:
+- -layout
+
+## broadcast
+Parameters:
+- -compression
+- -decompress
+- -layout
+
+# Departition Commands
+
+## gather
+## concat
+## interleave
+Parameters:
+- -layout
+
+# Data Movement
+
+## copy
+- -throttle
+- -layout
+
+## buffered-copy
+- -throttle
+- -buffer-bytes
+- -buffer-records
+- -layout
+
+# Sorting Family
+
+## local-sort
+- collate
+- -auto-max-core
+- -max-core
+- -layout
+
+## partial-sort
+- collator
+- -max-core
+- -layout
+
+## local-merge
+- collate
+- -layout
+
+## merge-runs
+- collator
+- -layout
+
+## sort-groups
+- major-key
+- minor-key
+- -auto-max-core
+- -max-core
+- -allow-unsorted
+- -layout
+
+## check-order
+- collate
+- limit
+- layout
+
+## find-splitters
+- collate
+- npartitions
+- layout
+
+# Transformation Family
+
+## reformat-transform
+Parameters:
+- -limit
+- -ramp
+- -select
+- -output-index
+- -output-indexes
+- -log
+- -layout
+
+Capabilities:
+- 1->0
+- 1->1
+- add columns
+- drop columns
+- type cast
+
+## multi-reformat-transform
+- limit
+- ramp
+- log
+- layout
+
+## normalize
+- xfr
+- limit
+- ramp
+- log
+- layout
+
+## denormalize
+- collator
+- xfr
+- limit
+- ramp
+- log
+- layout
+
+## select-transform
+- select
+- package
+- limit
+- ramp
+- log
+- layout
+
+## aggregate-transform
+- key
+- xfr
+- limit
+- ramp
+- log
+- layout
+
+## merge-transform
+- key
+- xfr
+- limit
+- ramp
+- log
+- layout
+
+## fuse-transform
+- xfr
+- limit
+- ramp
+- log
+- layout
+
+## combine
+- limit
+- ramp
+- log
+- layout
+
+## split
+- limit
+- ramp
+- log
+- layout
+
+## meta_pivot
+Purpose: Row-to-structured reshaping.
+
+# Join Family
+
+## merge-join
+Parameters:
+- key
+- xfr
+- limit
+- ramp
+- log
+- layout
+- max-core
+- check-sort
+- sql-null-comparisons
+
+## hash-join
+Parameters:
+- key
+- xfr
+- auto-max-core
+- max-core
+- driving
+- maintain-order
+- sql-null-comparisons
+- limit
+- ramp
+- log
+- layout
+
+# Aggregation Family
+
+## rollup
+- collator
+- xfr
+- limit
+- ramp
+- check-sort
+- log
+- layout
+
+## hash-rollup
+- collator
+- xfr
+- auto-max-core
+- max-core
+- limit
+- ramp
+- log
+- layout
+
+## scan
+- collator
+- xfr
+- limit
+- ramp
+- log
+- layout
+
+## hash-scan
+- collator
+- xfr
+- auto-max-core
+- max-core
+- limit
+- ramp
+- log
+- layout
+
+## continuous-rollup
+## continuous-scan
+## hash-aggregate
+
+# Dedup Family
+
+## dedup
+- key
+- package
+- select
+- keep
+- limit
+- ramp
+- log
+- layout
+
+## hash-dedup
+- key
+- package
+- select
+- max-core
+- limit
+- ramp
+- log
+- layout
+
+# Lookup Family
+
+- write-lookup
+- writelookups
+- write-bc-lookups
+- write-lookup-indexes
+- compute-bc-lookups
+- read-bc-data
+- read-multi-bc-data
+- merge-bc-data
+- merge-multi-bc-data
+- join-with-bc-lookup
+- db-lookup
+
+Purpose: Lookup datasets, indexes, enrichment.
+
+# Read/Write Commands
+
+Readers:
+- readfiles
+- Read_JSON
+- Read_Avro
+- Read_Parquet
+- Read_Excel
+- read-xml
+- Read_Nested
+- Read_ASN.1_Transform
+
+Writers:
+- writefiles
+- Write_JSON
+- Write_Avro
+- Write_Excel
+- write-xml
+- Write_Nested_Sequence
+
+# Queue Commands
+
+Publish:
+- publish
+- multipublish
+- publish_recycle
+
+Subscribe:
+- subscribe
+- batch-subscribe
+- unisubscribe
+- subscribe_recycle
+
+# Compression
+
+- compress
+- uncompress
+- gzip
+- gunzip
+- inflate
+
+# Security
+
+- encrypt
+- decrypt
+- aes_encrypt
+- aes_decrypt
+- ws-security-encode
+- ws-security-decode
+
+# Messaging Families
+
+Kafka
+RabbitMQ
+MQ
+JMS
+Pulsar
+Kinesis
+PubSub
+MQTT
+SMTP
+UDP
+
+# Database Families
+
+Generic:
+- db-load
+- db-unload
+- db-update
+- db-lookup
+- db-runsql
+- db-truncate
+
+Vendor Families:
+- Oracle
+- DB2
+- IMS
+- Mongo
+- HBase
+- BigQuery
+- Teradata
+- Netezza
+- Sybase
+- Cassandra
+- DynamoDB
+- Kudu
+
+# Runtime Classification
+
+Business Semantics:
+- metadata
+- reformat
+- normalize
+- denormalize
+- joins
+- aggregations
+- dedup
+- lookups
+- read/write components
+
+Data Movement:
+- partition
+- gather
+- concat
+- interleave
+- broadcast
+
+Runtime Only:
+- layout
+- phase
+- checkpoint
+- flow definitions
+- reports
+
