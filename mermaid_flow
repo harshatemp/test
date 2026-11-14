@@ -1,0 +1,721 @@
+import re
+from collections import defaultdict
+
+
+class MPFlowExtractor:
+
+    def __init__(self):
+
+        # ----------------------
+        # Graph Objects
+        # ----------------------
+
+        self.components = {}
+        self.flows = {}
+
+        # hierarchy
+
+        self.children = defaultdict(list)
+        self.parent_map = {}
+
+        # ports
+
+        self.oport_owner = {}
+        self.iport_owner = {}
+
+        # flows
+
+        self.flow_sources = {}
+        self.flow_targets = {}
+
+        # counts
+
+        self.ent_count = 0
+        self.rel_count = 0
+
+    def get_subgraph_entry_nodes(self):
+
+        edges = self.build_edges()
+
+        entry_nodes = {}
+
+        for parent_id, child_ids in self.children.items():
+
+            child_names = {
+                self.components[x]["name"]
+                for x in child_ids
+            }
+
+            indegree = {
+                name: 0
+                for name in child_names
+            }
+
+            for e in edges:
+
+                src = e["source"]
+                tgt = e["target"]
+
+                if (
+                    src in child_names and
+                    tgt in child_names
+                ):
+                    indegree[tgt] += 1
+
+            roots = [
+                node
+                for node, cnt in indegree.items()
+                if cnt == 0
+            ]
+
+            if roots:
+                entry_nodes[parent_id] = roots[0]
+
+        return entry_nodes
+
+    # =====================================================
+    # Split MP Record
+    # =====================================================
+
+    def split_mp_record(self, line):
+
+        line = line.strip()
+
+        if not line.startswith("{"):
+            return None
+
+        if not line.endswith("}"):
+            return None
+
+        content = line[1:-1]
+
+        fields = []
+        current = []
+
+        depth = 0
+        escape = False
+
+        for ch in content:
+
+            if escape:
+                current.append(ch)
+                escape = False
+                continue
+
+            if ch == "\\":
+                current.append(ch)
+                escape = True
+                continue
+
+            if ch == "{":
+                depth += 1
+
+            elif ch == "}":
+                depth -= 1
+
+            if ch == "|" and depth == 0:
+                fields.append("".join(current))
+                current = []
+            else:
+                current.append(ch)
+
+        fields.append("".join(current))
+
+        if fields and fields[-1] == "":
+            fields.pop()
+
+        fixed = []
+
+        for field in fields:
+
+            m = re.match(r'(\{.*\})(\d+)$', field)
+
+            if m:
+                fixed.append(m.group(1))
+                fixed.append(m.group(2))
+            else:
+                fixed.append(field)
+
+        return fixed
+
+    # =====================================================
+    # Extract all MP blocks
+    # =====================================================
+
+    def extract_blocks(self, text):
+
+        blocks = []
+
+        start = None
+        depth = 0
+
+        i = 0
+
+        while i < len(text):
+
+            ch = text[i]
+
+            if ch == "\\":
+                i += 2
+                continue
+
+            if ch == "{":
+
+                if depth == 0:
+                    start = i
+
+                depth += 1
+
+            elif ch == "}":
+
+                depth -= 1
+
+                if depth == 0:
+
+                    blocks.append(
+                        text[start:i + 1]
+                    )
+
+                    start = None
+
+            i += 1
+
+        return blocks
+
+    # =====================================================
+    # Read Repository Counts
+    # =====================================================
+
+    def extract_repository_counts(self, blocks):
+
+        for block in blocks[:10]:
+
+            if "ent_count|" in block:
+
+                m = re.search(
+                    r'ent_count\|(\d+)\|rel_count\|(\d+)',
+                    block
+                )
+
+                if m:
+
+                    self.ent_count = int(m.group(1))
+                    self.rel_count = int(m.group(2))
+
+                    return
+
+        raise Exception(
+            "Unable to find ent_count / rel_count"
+        )
+
+    # =====================================================
+    # Parse
+    # =====================================================
+
+    def parse(self, mp_file):
+
+        with open(
+            mp_file,
+            "r",
+            encoding="utf-8",
+            errors="ignore"
+        ) as f:
+
+            content = f.read()
+
+        blocks = self.extract_blocks(content)
+
+        self.extract_repository_counts(blocks)
+
+        print(
+            f"Entities={self.ent_count} "
+            f"Relations={self.rel_count}"
+        )
+
+        relation_blocks = blocks[self.ent_count + 1:]
+
+        for block in relation_blocks:
+
+            if "XXG" not in block:
+                continue
+
+            rec = self.split_mp_record(block)
+
+            if not rec:
+                continue
+
+            if len(rec) < 9:
+                continue
+
+            class_name = rec[1]
+
+            try:
+                obj_id = int(rec[-1])
+            except:
+                continue
+
+            attr_block = rec[6]
+
+            # =================================================
+            # COMPONENT / SUBGRAPH
+            # =================================================
+
+            if class_name == "XXGgraph_vertex_vertex":
+
+                try:
+                    parent_id = int(rec[-2])
+                except:
+                    parent_id = None
+
+                m = re.search(
+                    r"\{([^|]+)",
+                    attr_block
+                )
+
+                if m:
+
+                    name = m.group(1)
+
+                    self.components[obj_id] = {
+                        "id": obj_id,
+                        "name": name,
+                        "parent": parent_id
+                    }
+
+                    self.parent_map[obj_id] = parent_id
+
+                    if (
+                        parent_id is not None and
+                        parent_id != 1
+                    ):
+                        self.children[parent_id].append(
+                            obj_id
+                        )
+
+            # =================================================
+            # FLOW
+            # =================================================
+
+            elif class_name == "XXGgraph_flow_flow":
+                m = re.search(
+                    r"\{([^|]+)",
+                    attr_block
+                )
+                if m:
+
+                    self.flows[obj_id] = m.group(1)
+
+            # =================================================
+            # OPORT OWNER
+            # =================================================
+
+            elif class_name == "XXGvertex_oport_oport":
+
+                try:
+
+                    owner_id = int(rec[-2])
+                    port_id = int(rec[-1])
+
+                    self.oport_owner[port_id] = owner_id
+
+                except:
+                    pass
+
+            # =================================================
+            # IPORT OWNER
+            # =================================================
+
+            elif class_name == "XXGvertex_iport_iport":
+
+                try:
+
+                    owner_id = int(rec[-2])
+                    port_id = int(rec[-1])
+
+                    self.iport_owner[port_id] = owner_id
+
+                except:
+                    pass
+
+            # =================================================
+            # OPORT -> FLOW
+            # =================================================
+
+            elif class_name == "XXGoport_dst_flow":
+
+                try:
+
+                    oport = int(rec[-2])
+                    flow = int(rec[-1])
+
+                    self.flow_sources[flow] = oport
+
+                except:
+                    pass
+
+            # =================================================
+            # FLOW -> IPORT
+            # =================================================
+
+            elif class_name == "XXGiport_src_flow":
+
+                try:
+
+                    iport = int(rec[-2])
+                    flow = int(rec[-1])
+
+                    self.flow_targets[flow] = iport
+
+                except:
+                    pass
+
+    # =====================================================
+    # Resolve Component Owner
+    # =====================================================
+
+    def resolve_component(self, obj_id):
+
+        current = obj_id
+
+        while current is not None:
+
+            if current in self.components:
+                return current
+
+            current = self.parent_map.get(current)
+
+        return None
+
+    # =====================================================
+    # Build Edges
+    # =====================================================
+
+    def build_edges(self):
+
+        edges = []
+
+        for flow_id, flow_name in self.flows.items():
+
+            if flow_id not in self.flow_sources:
+                continue
+
+            if flow_id not in self.flow_targets:
+                continue
+
+            oport = self.flow_sources[flow_id]
+            iport = self.flow_targets[flow_id]
+
+            if oport not in self.oport_owner:
+                continue
+
+            if iport not in self.iport_owner:
+                continue
+
+            src_owner = self.resolve_component(
+                self.oport_owner[oport]
+            )
+
+            tgt_owner = self.resolve_component(
+                self.iport_owner[iport]
+            )
+
+            if src_owner is None:
+                continue
+
+            if tgt_owner is None:
+                continue
+
+            edges.append({
+
+                "flow_id": flow_id,
+                "flow_name": flow_name,
+
+                "source":
+                    self.components[src_owner]["name"],
+
+                "target":
+                    self.components[tgt_owner]["name"],
+
+                "source_oport": oport,
+                "target_iport": iport
+            })
+
+        return edges
+
+    # =====================================================
+    # Mermaid with Subgraphs
+    # =====================================================
+
+    def generate_mermaid(self):
+
+        edges = self.build_edges()
+
+        lines = []
+        lines.append("flowchart LR")
+        lines.append("")
+
+        #
+        # Build lookup structures
+        #
+
+        component_to_parent = {}
+
+        for comp_id, comp in self.components.items():
+
+            component_to_parent[
+                comp["name"]
+            ] = comp["parent"]
+
+        #
+        # Group child component names
+        #
+
+        subgraph_children = {}
+
+        for parent_id, child_ids in self.children.items():
+
+            if parent_id not in self.components:
+                continue
+
+            subgraph_children[parent_id] = [
+                self.components[c]["name"]
+                for c in child_ids
+                if c in self.components
+            ]
+
+        #
+        # Determine entry/exit nodes
+        #
+
+        subgraph_entry = {}
+        subgraph_exit = {}
+
+        for parent_id, child_names in subgraph_children.items():
+
+            indegree = {
+                c: 0 for c in child_names
+            }
+
+            outdegree = {
+                c: 0 for c in child_names
+            }
+
+            for e in edges:
+
+                src = e["source"]
+                tgt = e["target"]
+
+                if (
+                        src in child_names and
+                        tgt in child_names
+                ):
+                    indegree[tgt] += 1
+                    outdegree[src] += 1
+
+            roots = [
+                n
+                for n, d in indegree.items()
+                if d == 0
+            ]
+
+            leaves = [
+                n
+                for n, d in outdegree.items()
+                if d == 0
+            ]
+
+            if roots:
+                subgraph_entry[parent_id] = roots[0]
+
+            if leaves:
+                subgraph_exit[parent_id] = leaves[0]
+
+        #
+        # Emit subgraphs
+        #
+
+        internal_edges = set()
+
+        for parent_id, child_ids in self.children.items():
+
+            if parent_id not in self.components:
+                continue
+
+            parent_name = self.components[parent_id]["name"]
+
+            lines.append(
+                f"subgraph {parent_name}"
+            )
+
+            child_names = []
+
+            for child_id in child_ids:
+
+                if child_id not in self.components:
+                    continue
+
+                child_name = (
+                    self.components[child_id]["name"]
+                )
+
+                child_names.append(child_name)
+
+            #
+            # internal edges
+            #
+
+            for e in edges:
+
+                if (
+                    e["source"] in child_names and
+                    e["target"] in child_names
+                ):
+
+                    internal_edges.add(
+                        (
+                            e["source"],
+                            e["target"],
+                            e["flow_id"]
+                        )
+                    )
+
+                    lines.append(
+                        f'    {e["source"]} '
+                        f'-->|{e["flow_name"]}| '
+                        f'{e["target"]}'
+                    )
+
+            lines.append("end")
+            lines.append("")
+
+        #
+        # Global edges
+        #
+
+        for e in edges:
+
+            src = e["source"]
+            tgt = e["target"]
+
+            #
+            # Skip internal subgraph edges
+            #
+
+            if (
+                src,
+                tgt,
+                e["flow_id"]
+            ) in internal_edges:
+                continue
+
+            #
+            # Target is subgraph container
+            #
+
+            for parent_id, child_ids in self.children.items():
+
+                parent_name = (
+                    self.components[parent_id]["name"]
+                )
+
+                if tgt == parent_name:
+
+                    tgt = subgraph_entry.get(
+                        parent_id,
+                        tgt
+                    )
+
+            #
+            # Source is subgraph container
+            #
+
+            for parent_id, child_ids in self.children.items():
+
+                parent_name = (
+                    self.components[parent_id]["name"]
+                )
+
+                if src == parent_name:
+
+                    src = subgraph_exit.get(
+                        parent_id,
+                        src
+                    )
+
+            lines.append(
+                f'    {src} '
+                f'-->|{e["flow_name"]}'
+                f'| '
+                f'{tgt}'
+            )
+
+        return "\n".join(lines)
+    # =====================================================
+    # Port Mermaid
+    # =====================================================
+
+    def generate_port_mermaid(self):
+
+        edges = self.build_edges()
+
+        lines = []
+
+        lines.append("flowchart LR")
+        lines.append("")
+
+        for e in edges:
+
+            src = (
+                f'{e["source"]}'
+                f'_OUT_{e["source_oport"]}'
+            )
+
+            tgt = (
+                f'{e["target"]}'
+                f'_IN_{e["target_iport"]}'
+            )
+
+            src = re.sub(
+                r'[^A-Za-z0-9_]',
+                '_',
+                src
+            )
+
+            tgt = re.sub(
+                r'[^A-Za-z0-9_]',
+                '_',
+                tgt
+            )
+
+            flow = (
+                f'{e["flow_name"]}'
+                f'({e["flow_id"]})'
+            )
+
+            lines.append(
+                f'    {src} -->|{flow}| {tgt}'
+            )
+
+        return "\n".join(lines)
+
+
+# =======================================================
+# Usage
+# =======================================================
+
+parser = MPFlowExtractor()
+
+parser.parse("sample.mp")
+
+print("Components :", len(parser.components))
+print("Flows      :", len(parser.flows))
+print("OPorts     :", len(parser.oport_owner))
+print("IPorts     :", len(parser.iport_owner))
+
+print()
+print("==== Component Mermaid ====")
+print(parser.generate_mermaid())
+
+print()
+print("==== Port Mermaid ====")
+print(parser.generate_port_mermaid())
