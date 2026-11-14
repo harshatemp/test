@@ -1,0 +1,1495 @@
+@
+{18|Type|XXGrepository|Primary_Name|XXGgraph|_ab_object_schema|0|_ab_semantic_schema|4|eme_flatten_format|1|schema_version|34|root_id|0|ent_count|143|rel_count|240|}
+{2010001002|XXGdirectory|0|1|1|0|{@{}@}}
+
+{2010600005|XXGgraph|1|0|1|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|_ab_semantic_schema|4|1|1|Hnl|@{0|}}
+{30001002|XXparameter|_ab_has_render_fixups|2|1|1|Hl||{0|}}
+{30001002|XXparameter|!ab_compatibility|3.5.2.r9.0|3|9|P|@{0|}}
+{30001002|XXparameter|JSON_EXEMPLAR|$AI_SERIAL/read_and_write_json_exemplar.json|3|9|RK|@{0|}}
+{30001002|XXparameter|JSON_DML|$(json-to-dml -input-character-set utf-8 -output-character-set utf-8 -no-print-metadata-line $JSON_EXEMPLAR)|3|9|RK|@{0|}}
+{30001002|XXparameter|File_List_DML|record string("\\n") filename; end|7|9|RK|@{0|}}
+{30001002|XXparameter|Generated_File_List|$AI_SERIAL/read_and_write_json_rmf_list.txt|18|9|RK|@{0|}}
+{30001002|XXparameter|_UseNewErrorLogDML|True|13|1|Hl||{0|}}
+}}@0|@0|0|0|0|0|0|0|read_and_write_json|Ab Initio|@1|100|-1|@9|@34817|{0|}0|0|{0|}{0|}{0|}{0|}1.0|971000|760000|7|}}
+
+{2010703001|XXGgraphinfo|2|0|3|0|{@{}@1|update_4.0.0.r1.0|{2|1|1|}||||@@33207807|}}
+{2010705002|XXGrunsettings|3|0|5|0|{@{}@Normal||||1|60|0|1|1|0|0|0|0|1|1|0|0|1|2|1|1|0|0|0|@16|}}
+{2010242002|XXGface|4|0|7|0|{@{}@Arial|0|100|0|}}
+{2010240003|XXGlegend|5|0|9|0|{@{}@This graph demonstrates how to create JSON files from DML records and how to read JSON data into DML records.
+The first phase creates JSON data files and a file that Read Multiple Files uses in the second phase.|15000|35000|0|0|0|0|2|}}
+{2010242002|XXGface|6|0|11|0|{@{}@Arial|0|100|0|}}
+{2010240003|XXGlegend|7|0|13|0|{@{}@ |313000|157000|0|0|0|0|222|}}
+{2010242002|XXGface|8|0|15|0|{@{}@Arial|0|110|0|}}
+{2010240003|XXGlegend|9|0|17|0|{@{}@Phase 1: Generates 5 JSON files containing 1000 JSON messages each.
+It produces files in AI_SERIAL with names like "starting_at_1.json", "starting_at_1001.json", ...|46000|400000|0|0|0|0|360|}}
+{2010242002|XXGface|10|0|19|0|{@{}@Arial|0|110|0|}}
+{2010240003|XXGlegend|11|0|21|0|{@{}@Phase 2: Reads each generated JSON file in small blocks into Extract JSON Message. 
+Read JSON then parses each message. Read JSON outputs 5000 records.|45000|710000|0|0|0|0|364|}}
+{2010242002|XXGface|12|0|23|0|{@{}@Arial|0|110|0|}}
+{2010210004|XXGflow|13|0|25|0|{@{}@384|.5|.5|{0|}373|17|}}
+{2010210004|XXGflow|14|0|27|0|{@{}@384|.5|.5128205418586731|{0|}346|529|}}
+{2010210004|XXGflow|15|0|29|0|{@{}@384|.5|.5|{0|}374|17|}}
+{2010210004|XXGflow|16|0|31|0|{@{}@384|.5|.5|{0|}367|17|}}
+{2010210004|XXGflow|17|0|33|0|{@{}@384|.5|.5|{0|}296|17|}}
+{2010210004|XXGflow|18|0|35|0|{@{}@384|.5|.5|{0|}369|17|}}
+{2010210004|XXGflow|19|0|37|0|{@{}@384|.5|.5|{0|}353|17|}}
+{2010243001|XXGwatcher|20|0|39|0|{@{}@1|100|0||0|}}
+{2010210004|XXGflow|21|0|41|0|{@{}@384|.5|.5|{0|}365|17|}}
+
+{2010600005|XXGgraph|22|0|43|0|{Subgraph created from graph "Graph2"|{}@0|@565000|73750|0|0|0|0|347|Create File List for Read Multiple Files|Ab Initio|Created 10/8/2014 12:38:25 PM|1|100|-1|@9|@32769|{0|}0|0|{0|}{0|}{0|}{0|}1.0|566000|210000|3|}}
+
+{2010210004|XXGflow|23|0|45|0|{@{}@384|.5|.5|{0|}61|17|}}
+{2010210004|XXGflow|24|0|47|0|{@{}@384|.5|.5|{0|}57|17|}}
+{2010501005|XXGpvertex|25|0|49|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Transform/Filter_by_Expression.mpc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|select_expr|start_new_file != 0|3|2|$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|deselect_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|reject_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@0|Filter by Expression|65000|45000|0|0|0|0|0|Filter by Expression: Select if start_new_file is not 0|Ab Initio Software|Built-in 1.0:|1|100|0||6||32769|1|{1|0|}}}
+{2010203004|XXGoport|26|0|51|0|{@{}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|27|0|54|0|{@{}@0|0|0|0|deselect|0.0|@@@2192|0|}}
+{2010203004|XXGoport|28|0|56|0|{@{}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|29|0|58|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|30|0|60|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|31|0|62|0|{@{}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010501005|XXGpvertex|32|0|64|0|{Filters data records according to the specified DML expression.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|select-transform|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|select_expr||20|2|RFO$|Filter expression|{0|}}
+{30001002|XXparameter|select_expr.condition|param use_package False|3|15|P?|@{0|}}
+{30001002|XXparameter|no_select_expr|-use_package|3|2|RO$|Replaces select_expr as the positional argument when use_package is true|{0|}}
+{30001002|XXparameter|no_select_expr.condition|param use_package True|3|15|P?|@{0|}}
+{30001002|XXparameter|use_package|False|13|1|Fl|If true, use the select() function defined in the package|{0|}}
+{30001002|XXparameter|use_package.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|package||8|1|FKl|Package containing transforms and data types|{0|}}
+{30001002|XXparameter|package.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|error_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|log_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|num_operations|6|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|operation1|integer(8) select_out::select(in)|3|2|H$|Use this instead of the select_expr parameter when use_package is true.|{0|}}
+{30001002|XXparameter|operation1.condition|version 2.16: param use_package True|3|15|P?|@{0|}}
+{30001002|XXparameter|operation1_analysis|skip_missing integer(8) select_out::select(in)|3|2|H$||{0|}}
+{30001002|XXparameter|operation1_analysis.condition|version 2.16: param use_package True|3|15|P?|@{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* 99.0 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword.condition|version :2.12.999.m999|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp_keyword2|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword2.condition|version 2.13:|3|15|P?|@{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp ramp_keyword2 ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort|in|3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort|out|3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Replace with flow|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|port_analysis|reject=in; out=in; deselect=in|3|2|H$||{0|}}
+{30001002|XXparameter|continuous_analysis||3|2|H$||{0|}}
+{30001002|XXparameter|filter_aggregate_analysis|out=filter(select_expr); deselect=filter(select_expr); out=filter_xfr(package.select_out); deselect=filter_xfr(package.select_out);|3|2|H$||{0|}}
+{30001002|XXparameter|num_types|2|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type2|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|operation2|optional out::output_for_error(error_info, in)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation3|optional error::make_error(error_info, in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation4|optional log_event::log_error(error_info, in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation5|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|operation6|optional ::on_startup(long in_recovery)|3|2|H$|Function executed at graph startup|{0|}}
+{30001002|XXparameter|num_callbacks|5|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|deselect_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|reject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out,deselect,reject,error,log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581349|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: deselect = out
+metadata type: out = deselect
+metadata type: reject = in
+metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: log = remote("$AB_HOME/include/log-info.dml")|3|1|HKl|@{0|}}
+{30001002|XXparameter|_propagate_through|metadata type: out = in
+metadata type: in = out
+metadata type: deselect = in
+metadata type: in = deselect|3|1|FHKl|@{0|}}
+}}@0|Filter by Expression|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|33|0|66|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|34|0|69|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|deselect|0.0|@@@2192|0|}}
+{2010203004|XXGoport|35|0|72|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|36|0|75|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|37|0|78|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|38|0|81|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010503005|XXGfvertex|39|0|84|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Datasets/Output_File.mdc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|Layout|file:$Generated_File_List|3|2|$|@{0|}}
+{30001002|XXparameter|eme_dataset_mapping|$[[record map_component 1 datasets [vector [record variable _interp_("write", "pdl") map_dataset 1 mapping [record dataset_path _interp_("$Generated_File_List", "pdl") create_update 1 is_db 0 dml_info NULL]]]]]|3|9||@{0|}}
+{30001002|XXparameter|write_metadata||3|8|s=|@{0|}}
+}}@0|Output File|460000|95000|0|0|0|0|0|Generated List for Read Multiple Files|Ab Initio Software|@1|100|0||6||32769|-1|-1|}}
+{2010202004|XXGiport|40|0|86|0|{@{}@0|0|0|0|write|0.0|@@@1780|0|}}
+{2010503005|XXGfvertex|41|0|89|0|{Represents one file, many files, or a multifile as an output from your graph.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|protection|0666|12|2|RF$||{0|}}
+{30001002|XXparameter|mode|0x0062|1|2|FH$|modes of access|{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Remove completely|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|key||19|2|RF$|Key specifier For Lookup File|{0|}}
+{30001002|XXparameter|key.condition|param direct_addressed False mode lookup|3|15|P?|@{0|}}
+{30001002|XXparameter|m_catalog_add_option_names|block_compressed keep_on_disk direct_addressed only_last_key_instance orc_file|3|2|H$||{0|}}
+{30001002|XXparameter|eme_index_location||3|2|F$|Place in the EME to create a dataset corresponding to this index.|{0|}}
+{30001002|XXparameter|eme_index_location.condition|mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|index_url||28|2|F$|The URL of the index for this lookup file (optional)|{0|}}
+{30001002|XXparameter|index_url.condition|param direct_addressed False mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|keep_on_disk|False|13|1|Fl|Keep on Disk|{0|}}
+{30001002|XXparameter|keep_on_disk.condition|mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|block_compressed|False|13|1|Fl|Block Compressed|{0|}}
+{30001002|XXparameter|block_compressed.condition|mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|either_or|value block_compressed True True sameas keep_on_disk default constant True|13|13|v|Either B-C or K-o-D|{0|}}
+{30001002|XXparameter|direct_addressed|False|13|1|Fl|Set to true if the block compressed lookup is direct addressed|{0|}}
+{30001002|XXparameter|direct_addressed.condition|mode lookup version 2.15.5.r34: param_exact either_or True|3|15|P?|@{0|}}
+{30001002|XXparameter|only_last_key_instance|False|13|1|Fl|Match only the last instance of each key|{0|}}
+{30001002|XXparameter|only_last_key_instance.condition|mode lookup version 3.0.2.r12.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|orc_file|False|13|1|Fl|Set to true if it is Hive ORC file|{0|}}
+{30001002|XXparameter|orc_file.condition|mode lookup version 3.2.2.r15.0: param_exact direct_addressed True param_exact block_compressed False|3|15|P?|@{0|}}
+{30001002|XXparameter|Layout||28|9|RF||{0|}}
+{30001002|XXparameter|eme_dataset_mapping||40|9|F|Place in the EME to create the dataset(s) corresponding to this component.|{0|}}
+{30001002|XXparameter|write_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581342|1|1|Hl|The last modification time of this component's template|{0|}}
+}}@0|Output File|0|0|0|0|0|0|0|@|@1|100|-1|@6|@1|-1|-1|}}
+{2010202004|XXGiport|42|0|91|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|write|0.0|@@@1780|0|}}
+{2010501005|XXGpvertex|43|0|94|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Transform/Reformat.mpc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out0_metadata|$File_List_DML|3|9||@{0|}}
+{30001002|XXparameter|reject0_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|error0_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@0|Reformat|275000|67500|0|0|0|0|0|Reduce to filename|Ab Initio Software|Built-in 1.0:|1|100|0||6||32769|1|{1|0|}}}
+{2010203004|XXGoport|44|0|96|0|{@{}@0|0|0|0|out0|0.0|count|out|0|2448|0|}}
+{2010203004|XXGoport|45|0|99|0|{@{}@0|0|0|0|reject0|0.0|count|reject|0|1168|0|}}
+{2010203004|XXGoport|46|0|101|0|{@{}@0|0|0|0|error0|0.0|count|error|0|1176|0|}}
+{2010203004|XXGoport|47|0|103|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|48|0|105|0|{@{}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010501005|XXGpvertex|49|0|108|0|{Changes the record format of your data by dropping fields or by using DML expressions to add fields, combine fields, or modify the data.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|reformat-transform|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|count|1|1|1|Fl|Number of reformat transforms|{0|}}
+{30001002|XXparameter|count.is_index|true|3|9|P|@{0|}}
+{30001002|XXparameter|transform0||8|1|FOl|Reformat transform|{0|}}
+{30001002|XXparameter|transform0.index|count|3|9|P|@{0|}}
+{30001002|XXparameter|transform0.index_value|0|3|9|P|@{0|}}
+{30001002|XXparameter|transform0.index_name|transform|3|9|P|@{0|}}
+{30001002|XXparameter|select||20|2|FK$|Filter expression before reformatting|{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|error_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|log_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* 99.0 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword.condition|version :2.12.999.m999|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp_keyword2|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword2.condition|version 2.13:|3|15|P?|@{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp ramp_keyword2 ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|output_index||8|1|FKl|Output index computation|{0|}}
+{30001002|XXparameter|output_index.display_name|output-index|3|9|P|@{0|}}
+{30001002|XXparameter|output_index.keyword|output-index|3|9|P|@{0|}}
+{30001002|XXparameter|output_index_port|discriminator|3|2|FHK$|Output index port for debugger|{0|}}
+{30001002|XXparameter|output_index_port.display_name|output-index_port|3|9|P|@{0|}}
+{30001002|XXparameter|output_index_port.keyword|output-index_port|3|9|P|@{0|}}
+{30001002|XXparameter|output_index_signature|int output_index_out::output_index(in)|3|2|H$|Function returning index of output port|{0|}}
+{30001002|XXparameter|output_index_signature.display_name|output-index_signature|3|9|P|@{0|}}
+{30001002|XXparameter|output_indexes||8|1|FKl|Output index vector computation|{0|}}
+{30001002|XXparameter|output_indexes.display_name|output-indexes|3|9|P|@{0|}}
+{30001002|XXparameter|output_indexes.keyword|output-indexes|3|9|P|@{0|}}
+{30001002|XXparameter|output_indexes_port|discriminator|3|2|FHK$|Output index port for debugger|{0|}}
+{30001002|XXparameter|output_indexes_port.display_name|output-indexes_port|3|9|P|@{0|}}
+{30001002|XXparameter|output_indexes_port.keyword|output-indexes_port|3|9|P|@{0|}}
+{30001002|XXparameter|output_indexes_signature|int[int] output_indexes_out::output_indexes(in)|3|2|H$|Function returning vector of indexes of output ports|{0|}}
+{30001002|XXparameter|output_indexes_signature.display_name|output-indexes_signature|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|num_operations|7|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|operation1|out::reformat(in)|3|2|H$|Reformat operation|{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort|in|3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort|out*|3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Replace with flow|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|port_analysis|legacy_xfr;reject*=in;out*=in|3|2|H$||{0|}}
+{30001002|XXparameter|continuous_analysis||3|2|H$||{0|}}
+{30001002|XXparameter|filter_aggregate_analysis|out=filter(select)|3|2|H$||{0|}}
+{30001002|XXparameter|num_types|3|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type2|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type3|event_info_t event_info "record int event_type; end"|3|2|H$|Information about the kind of event that happened|{0|}}
+{30001002|XXparameter|operation2|optional out::output_for_error(error_info, in)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation3|optional error::make_error(error_info, in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation4|optional log_event::log_error(error_info, in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation5|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|operation6|optional out::output_at_event(event_info)|3|2|H$|Function to allow the output of an additional record at event|{0|}}
+{30001002|XXparameter|operation7|optional ::on_startup(long in_recovery)|3|2|H$|Function executed at graph startup|{0|}}
+{30001002|XXparameter|num_callbacks|6|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|main_mp_port|count out|3|1|l||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out0_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|reject0_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error0_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out[*],reject[*],error[*],log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581349|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: reject = in
+metadata type: log = remote("$AB_HOME/include/log-info.dml")|3|1|HKl|@{0|}}
+{30001002|XXparameter|_propagate_through||3|1|FHKl|@{0|}}
+}}@0|Reformat|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|50|0|110|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+{30001002|XXparameter|transform0||8|8|FO=|Reformat transform|{0|}}
+{30001002|XXparameter|transform0.index|count|3|9|P|@{0|}}
+{30001002|XXparameter|transform0.index_value|0|3|9|P|@{0|}}
+{30001002|XXparameter|transform0.index_name|transform|3|9|P|@{0|}}
+}}@0|0|0|0|out0|0.0|count|out|0|2448|0|}}
+{2010203004|XXGoport|51|0|114|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject0|0.0|count|reject|0|1168|0|}}
+{2010203004|XXGoport|52|0|117|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error0|0.0|count|error|0|1176|0|}}
+{2010203004|XXGoport|53|0|120|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|54|0|123|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010501005|XXGpvertex|55|0|127|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Translate/JSON/Write_JSON.mpc|3|9|Pf|@{0|}}
+{30001002|XXparameter|package|// This keeps track of how many JSON messages are in the current group
+let long num_messages_in_group = 0;
+
+// The number of files we have created.
+let long number_of_files = 0;
+
+// When the number of messages in a group reaches 1000, we will start a new file.
+constant long message_max = 1000;
+
+out::create_output(in,json_data)=
+begin
+  // Start a new file if this is the beginning or we've reached message_max
+  let long start_new_file = (number_of_files == 0) \|\| (num_messages_in_group == message_max);
+  if (start_new_file)
+  begin
+    // Add to the number of files
+    number_of_files = number_of_files + 1;
+    // Reset the group message number.
+    num_messages_in_group = 0;
+  end
+  
+  // Increment the group message number.
+  num_messages_in_group = num_messages_in_group + 1;
+
+  out.json_data :: json_data;
+  out.start_new_file :: start_new_file;
+  out.filename :: "json_test_data_" + (string(""))(decimal("")) in.message_number + ".json";
+end;|3|1|l|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata|record
+  string(int) filename;
+  integer(1) start_new_file;
+  utf8 string(int) json_data;
+end|3|1|l|@{0|}}
+{30001002|XXparameter|reject_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@0|Write JSON|194000|255000|0|0|0|0|0|Write JSON|Ab Initio Software|Built-in 3.1.0.r1.0:|1|100|0||6||1|1|{1|0|}}}
+{2010203004|XXGoport|56|0|129|0|{@{}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|57|0|132|0|{@{}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|58|0|134|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|59|0|136|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|60|0|138|0|{@{}@0|0|0|0|in|0.0|@@@1936|0|}}
+{2010501005|XXGpvertex|61|0|141|0|{Writes a DML record the format of which is produced by xml-to-dml or json-to-dml to the out port as JSON data.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|Write_JSON|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|/~ab_home/bin/write-json|3|2|H$||{0|}}
+{30001002|XXparameter|package||8|1|FKl|Functions for message creation|{0|}}
+{30001002|XXparameter|package.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|hide_nulls|False|13|1|FKl|If true, do not add null JSON tags to the output.|{0|}}
+{30001002|XXparameter|hide_nulls.display_name|hide-nulls|3|9|P|@{0|}}
+{30001002|XXparameter|hide_nulls.keyword|hide-nulls|3|9|P|@{0|}}
+{30001002|XXparameter|hide_nulls.condition|version 3.2.1.r10:|3|15|P?|@{0|}}
+{30001002|XXparameter|no_escape_forward_slash|False|13|1|FKl|If true, do not escape forward slash (/).|{0|}}
+{30001002|XXparameter|no_escape_forward_slash.display_name|no-escape-forward-slash|3|9|P|@{0|}}
+{30001002|XXparameter|no_escape_forward_slash.keyword|no-escape-forward-slash|3|9|P|@{0|}}
+{30001002|XXparameter|no_escape_forward_slash.condition|version 3.3.1.r3:|3|15|P?|@{0|}}
+{30001002|XXparameter|prefix_attributes|True|13|1|FKl|If false, do not prefix xml attributes with '\@'. Do not change this. This is for compatibility only.|{0|}}
+{30001002|XXparameter|prefix_attributes.display_name|prefix-attributes|3|9|P|@{0|}}
+{30001002|XXparameter|prefix_attributes.keyword|prefix-attributes|3|9|P|@{0|}}
+{30001002|XXparameter|prefix_attributes.condition|version 3.5.2.r9:|3|15|P?|@{0|}}
+{30001002|XXparameter|prefix_attributes.update_clauses|update_value False|3|9|P|@{0|}}
+{30001002|XXparameter|write_blocks|False|13|1|FKl|If True, flush the internal buffer before it reaches the maximum size specified by maximum-block-bytes. The create_output() function will be called with the current buffer contents when the buffer needs to be flushed. |{0|}}
+{30001002|XXparameter|write_blocks.display_name|write-blocks|3|9|P|@{0|}}
+{30001002|XXparameter|write_blocks.keyword|write-blocks|3|9|P|@{0|}}
+{30001002|XXparameter|write_blocks.condition|version 4.0.0.r1:|3|15|P?|@{0|}}
+{30001002|XXparameter|maximum_block_bytes|5000000|1|2|FK$|Block size when write-blocks is True. A value less than 1K will be set to 1K. A value greater than 1.2G will be reduced to 1.2G.|{0|}}
+{30001002|XXparameter|maximum_block_bytes.display_name|maximum-block-bytes|3|9|P|@{0|}}
+{30001002|XXparameter|maximum_block_bytes.keyword|maximum-block-bytes|3|9|P|@{0|}}
+{30001002|XXparameter|maximum_block_bytes.condition|param_exact write-blocks True version 4.0.0.r1:|3|15|P?|@{0|}}
+{30001002|XXparameter|type3|data_info_t data_info "record integer(1) new_message; integer(1) complete; end"|3|2|H$|Information about the json_data, mainly used when write-blocks is true.|{0|}}
+{30001002|XXparameter|type3.condition|version 4.0.0.r1:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation1|optional out::create_output(in, utf8 string(int) json_data)|3|2|H$|Called to create an output record. This is required if the input has pass-thru fields or if write-blocks is true.|{0|}}
+{30001002|XXparameter|operation1.condition|version 3.2.6.r28:4.0.0|3|15|P?|@{0|}}
+{30001002|XXparameter|operation2|optional out::create_output(in, utf8 string(int) json_data, data_info)|3|2|H$|Called to create an output record. This is required if the input has pass-thru fields.|{0|}}
+{30001002|XXparameter|operation2.condition|version 4.0.0.r1:|3|15|P?|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort|in|3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort|out|3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Replace with flow|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|port_analysis|out=all_to_all(in)|3|2|H$||{0|}}
+{30001002|XXparameter|continuous_analysis||3|2|H$||{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|reject_threshold.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|logging.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|version 3.2.6.r28: param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|num_types|3|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|num_types.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|type1|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type1.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|type2|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type2.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation3|optional out::output_for_error(error_info, in)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation3.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation4|optional error::make_error(error_info, in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation4.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation5|optional log_event::log_error(error_info, in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation5.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation6|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|operation6.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|num_operations|6|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|num_operations.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|num_callbacks|4|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|num_callbacks.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_error_format.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|_use_rich_log_format.condition|version 3.2.6.r28:|3|15|P?|@{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|reject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out,reject,error,log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581349|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: log = remote("$AB_HOME/include/log-info.dml")
+metadata type: reject = in|3|1|HKl|@{0|}}
+{30001002|XXparameter|_propagate_through||3|1|FHKl|@{0|}}
+}}@0|Write JSON|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|62|0|143|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|63|0|146|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|64|0|149|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|65|0|152|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|66|0|155|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1936|0|}}
+{2010501005|XXGpvertex|67|0|159|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Validate/Create_Data.mpc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|num_records|5000|3|2|$|@{0|}}
+{30001002|XXparameter|transform|let string(int)[int] house_types = [vector "shack", "single family", "two family", "three family", "multi-family", "mansion", "palace", "castle", "township", "state", "country", "world", "universe"];
+let string(int)[int] marital_status = [vector "Single", "Married"];
+
+out::create(index) = begin
+  let string(int) employer = random_value();
+  
+  out.data.house :: house_types[random(length_of(house_types))];
+  out.data.money :: random(10000000);
+  out.data.id_number :: random(99999999) + 11111111;
+  out.data.status :: marital_status[random(length_of(marital_status))];
+  out.data.employer :: if (length_of(employer) > 0) employer;
+  out.message_number :: index;
+end;|3|1|l|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata|$JSON_DML
+
+metadata type = record
+  json_top_t data;
+  long message_number;
+end;|3|9||@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@0|Create Data|55000|270000|0|0|0|0|0|Create Random Data|Ab Initio Software|Built-in 2.15.2:|1|100|0||6||32769|1|{1|0|}}}
+{2010203004|XXGoport|68|0|161|0|{@{}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|69|0|164|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|70|0|166|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010501005|XXGpvertex|71|0|168|0|{Creates records according to a transform.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|Create_Data|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|/~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|num_records||1|2|RFO$|Number of records to generate|{0|}}
+{30001002|XXparameter|num_records.display_name|num-records|3|9|P|@{0|}}
+{30001002|XXparameter|transform|out::create(index) = begin
+  out :: random_value();
+end;|8|1|FOl|DML function|{0|}}
+{30001002|XXparameter|identical_records|False|13|1|FKl|Whether to evaluate the transform once only, or once for each record|{0|}}
+{30001002|XXparameter|identical_records.display_name|identical-records|3|9|P|@{0|}}
+{30001002|XXparameter|identical_records.keyword|identical-records|3|9|P|@{0|}}
+{30001002|XXparameter|identical_records_display_values|Evaluatetransformanewforeachrecord Evaluatetransformonceandusethatvalueforallrecords|3|2|H$||{0|}}
+{30001002|XXparameter|identical_records_display_values.display_name|identical-records-display-values|3|9|P|@{0|}}
+{30001002|XXparameter|start_index|1|1|2|F$|Value to pass as index on first call to create()|{0|}}
+{30001002|XXparameter|start_index.display_name|start-index|3|9|P|@{0|}}
+{30001002|XXparameter|start_index.condition|version 3.3.4.r13.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|start_index_non_default|value start-index 1 False default constant True|13|13|Rv|Automatically set to True if start-index != 1|{0|}}
+{30001002|XXparameter|start_index_non_default.display_name|start-index-non-default|3|9|P|@{0|}}
+{30001002|XXparameter|start_index_impl|sameas start-index default dollar_substitution 1|1|13|Kv|Passed for use as index on first call to create() only if not defaulted|{0|}}
+{30001002|XXparameter|start_index_impl.display_name|start-index-impl|3|9|P|@{0|}}
+{30001002|XXparameter|start_index_impl.keyword|start-index-impl|3|9|P|@{0|}}
+{30001002|XXparameter|start_index_impl.condition|param start-index-non-default True|3|15|P?|@{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|error_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|log_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* 99.0 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|1|1|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_checkpoint|0|15|1|RFKl|Frequency of checkpoint records to log|{2|0|1|}}
+{30001002|XXparameter|log_checkpoint.condition|version 3.0.4.r17: param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_checkpoint.update_clauses|update_value 1|3|9|P|@{0|}}
+{30001002|XXparameter|log_computepoint|0|15|1|RFKl|Frequency of computepoint records to log|{2|0|1|}}
+{30001002|XXparameter|log_computepoint.condition|version 3.0.4.r17: param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_computepoint.update_clauses|update_value 1|3|9|P|@{0|}}
+{30001002|XXparameter|continuous|False|13|1|RFOl|Whether to produce checkpoints or computepoints.|{0|}}
+{30001002|XXparameter|checkpoint_interval|1|1|2|FO$|Number of records between checkpoints, or 0 to indicate that no checkpoints are to be generated.|{0|}}
+{30001002|XXparameter|checkpoint_interval.display_name|checkpoint-interval|3|9|P|@{0|}}
+{30001002|XXparameter|checkpoint_interval.condition|param continuous True|3|15|P?|@{0|}}
+{30001002|XXparameter|computepoint_interval|0|1|2|FO$|Number of records between computepoints, or 0 to indicate that no computepoints are to be generated.|{0|}}
+{30001002|XXparameter|computepoint_interval.display_name|computepoint-interval|3|9|P|@{0|}}
+{30001002|XXparameter|computepoint_interval.condition|param continuous True|3|15|P?|@{0|}}
+{30001002|XXparameter|do_timed_checkpoints|False|13|1|FKl|Generate checkpoints at timed intervals|{0|}}
+{30001002|XXparameter|do_timed_checkpoints.display_name|do-timed-checkpoints|3|9|P|@{0|}}
+{30001002|XXparameter|do_timed_checkpoints.keyword|do-timed-checkpoints|3|9|P|@{0|}}
+{30001002|XXparameter|do_timed_checkpoints.condition|param continuous True|3|15|P?|@{0|}}
+{30001002|XXparameter|num_operations|5|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|operation1|out::create(long index)|3|2|H$|Function taking integer index counting 1,2,3,4... to produce records on the output.|{0|}}
+{30001002|XXparameter|continuous_analysis|continuous ? subscriber :|3|2|H$||{0|}}
+{30001002|XXparameter|num_types|2|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type2|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|operation2|optional out::output_for_error(error_info, unsigned integer(8) in)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation3|optional error::make_error(error_info, unsigned integer(8) in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation4|optional log_event::log_error(error_info, unsigned integer(8) in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation5|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|num_callbacks|4|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out,error,log::document()|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581349|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: log = remote("$AB_HOME/include/log-info.dml")|3|1|HKl|@{0|}}
+}}@0|Create Data|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|72|0|170|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|73|0|173|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|74|0|176|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|75|0|188|0|{@{}@0|0|0|0|in0|.6758241758241759|@@@13840|0|}}
+{2010501005|XXGpvertex|76|0|193|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Translate/JSON/Extract_JSON_Message.mpc|3|9|Pf|@{0|}}
+{30001002|XXparameter|package|out::create_output(in,raw_json)=
+begin
+ out.json_data :: raw_json;
+ out.* :: in.*;
+end;|3|1|l|@{0|}}
+{30001002|XXparameter|json_data_field_name|json_data|3|2|$|@{0|}}
+{30001002|XXparameter|source_key|\{filename\}|3|2|$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata|record
+  string(int) filename;
+  utf8 string(int) json_data;
+end;|3|1|l|@{0|}}
+{30001002|XXparameter|reject_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@1|Extract JSON Message|466000|550000|0|0|0|0|0|Extract JSON Message|Ab Initio Software|Built-in 3.2.6.r28:|1|100|0||6||1|1|{1|0|}}}
+{2010203004|XXGoport|77|0|195|0|{@{}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|78|0|198|0|{@{}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|79|0|200|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|80|0|202|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|81|0|204|0|{@{}@0|0|0|0|in|0.0|@@@1936|0|}}
+{2010501005|XXGpvertex|82|0|207|0|{Reads blocks of JSON data, gathers the data until the end of a message is reached, and then calls the create_output function to generate an output record.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|Extract_JSON_Message|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|package||8|1|RFOl|Functions for message creation|{0|}}
+{30001002|XXparameter|json_data_field_name||3|2|RFK$|Name of the field in the input record that contains the JSON data to be parsed.|{0|}}
+{30001002|XXparameter|json_data_field_name.display_name|json-data-field-name|3|9|P|@{0|}}
+{30001002|XXparameter|json_data_field_name.keyword|json-data-field-name|3|9|P|@{0|}}
+{30001002|XXparameter|source_key||19|2|RFK$|The name of the field that represents the source of the JSON data.|{0|}}
+{30001002|XXparameter|source_key.display_name|source-key|3|9|P|@{0|}}
+{30001002|XXparameter|source_key.keyword|source-key|3|9|P|@{0|}}
+{30001002|XXparameter|remove_nulls|False|13|1|FKl|If true, remove null fields from the JSON message|{0|}}
+{30001002|XXparameter|remove_nulls.display_name|remove-nulls|3|9|P|@{0|}}
+{30001002|XXparameter|remove_nulls.keyword|remove-nulls|3|9|P|@{0|}}
+{30001002|XXparameter|remove_empty|False|13|1|FKl|If true, remove empty fields, objects and arrays from the JSON message|{0|}}
+{30001002|XXparameter|remove_empty.display_name|remove-empty|3|9|P|@{0|}}
+{30001002|XXparameter|remove_empty.keyword|remove-empty|3|9|P|@{0|}}
+{30001002|XXparameter|include_paths||3|2|FK$|A JSON array or string with the paths to include/exclude when parsing|{0|}}
+{30001002|XXparameter|include_paths.display_name|include-paths|3|9|P|@{0|}}
+{30001002|XXparameter|include_paths.keyword|include-paths|3|9|P|@{0|}}
+{30001002|XXparameter|include_paths.condition|version 3.3.2.r8.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|num_operations|5|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|operation1|out::create_output(in, utf8 string(int) raw_json)|3|2|H$|Called to create an output record. The raw_json argument is the JSON data comprising a complete message.|{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|continuous_analysis||3|2|H$||{0|}}
+{30001002|XXparameter|num_types|2|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type2|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|operation2|optional out::output_for_error(error_info, in)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation3|optional error::make_error(error_info, in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation4|optional log_event::log_error(error_info, in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation5|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|num_callbacks|4|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|reject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out,reject,error,log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581349|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: log = remote("$AB_HOME/include/log-info.dml")
+metadata type: reject = in|3|1|HKl|@{0|}}
+{30001002|XXparameter|_propagate_through||3|1|FHKl|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|@15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+}}@0|Extract JSON Message|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|83|0|209|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|84|0|212|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|85|0|215|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|86|0|218|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|87|0|221|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1936|0|}}
+{2010503005|XXGfvertex|88|0|224|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Datasets/Input_File.mdc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|Layout|file:$Generated_File_List|3|2|$|@{0|}}
+{30001002|XXparameter|eme_dataset_mapping|$[[record map_component 1 datasets [vector [record variable _interp_("read", "pdl") map_dataset 1 mapping [record dataset_path _interp_("$Generated_File_List", "pdl") create_update 1 is_db 0 dml_info NULL]]]]]|3|9||@{0|}}
+{30001002|XXparameter|read_metadata|$File_List_DML|3|9||@{0|}}
+}}@1|Input File|65000|577500|0|0|0|0|0|Input File: Generated file list|Ab Initio Software|@1|100|-1||6||33025|-1|-1|}}
+{2010203004|XXGoport|89|0|226|0|{@{}@0|0|0|0|read|0.0|@@@2164|0|}}
+{2010503005|XXGfvertex|90|0|229|0|{Represents one file, many files, or a multifile as an input to your graph.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|protection|0666|12|2|RF$||{0|}}
+{30001002|XXparameter|mode|0x0001|1|2|FH$|modes of access|{0|}}
+{30001002|XXparameter|format|uninterpreted|15|1|RFKl|The input file format: 'uninterpreted' (raw data), 'seqfile' (Hadoop sequence file), 'parquet' (Parquet format), 'orc' (ORC format), 'avro' (Avro format), 'texttable' (Hive text table).|{6|uninterpreted|orc|parquet|seqfile|avro|texttable|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Remove completely|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|key||19|2|RF$|Key specifier For Lookup File|{0|}}
+{30001002|XXparameter|key.condition|param direct_addressed False mode lookup|3|15|P?|@{0|}}
+{30001002|XXparameter|m_catalog_add_option_names|block_compressed keep_on_disk direct_addressed only_last_key_instance orc_file|3|2|H$||{0|}}
+{30001002|XXparameter|eme_index_location||3|2|F$|Place in the EME to create a dataset corresponding to this index.|{0|}}
+{30001002|XXparameter|eme_index_location.condition|mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|index_url||28|2|F$|The URL of the index for this lookup file (optional)|{0|}}
+{30001002|XXparameter|index_url.condition|param direct_addressed False mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|keep_on_disk|False|13|1|Fl|Keep on Disk|{0|}}
+{30001002|XXparameter|keep_on_disk.condition|mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|block_compressed|False|13|1|Fl|Block Compressed|{0|}}
+{30001002|XXparameter|block_compressed.condition|mode lookup version 2.15.2.r23:|3|15|P?|@{0|}}
+{30001002|XXparameter|either_or|value block_compressed True True sameas keep_on_disk default constant True|13|13|v|Either B-C or K-o-D|{0|}}
+{30001002|XXparameter|direct_addressed|False|13|1|Fl|Set to true if the block compressed lookup is direct addressed|{0|}}
+{30001002|XXparameter|direct_addressed.condition|mode lookup version 2.15.5.r34: param_exact either_or True|3|15|P?|@{0|}}
+{30001002|XXparameter|only_last_key_instance|False|13|1|Fl|Match only the last instance of each key|{0|}}
+{30001002|XXparameter|only_last_key_instance.condition|mode lookup version 3.0.2.r12.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|orc_file|False|13|1|Fl|Set to true if it is Hive ORC file|{0|}}
+{30001002|XXparameter|orc_file.condition|mode lookup version 3.2.2.r15.0: param_exact direct_addressed True param_exact block_compressed False|3|15|P?|@{0|}}
+{30001002|XXparameter|Layout||28|9|RF||{0|}}
+{30001002|XXparameter|eme_dataset_mapping||40|9|F|Place in the EME to create the dataset(s) corresponding to this component.|{0|}}
+{30001002|XXparameter|read_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581342|1|1|Hl|The last modification time of this component's template|{0|}}
+}}@0|Input File|0|0|0|0|0|0|0|@|@1|100|-1|@6|@1|-1|-1|}}
+{2010203004|XXGoport|91|0|231|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|read|0.0|@@@2164|0|}}
+{2010501005|XXGpvertex|92|0|234|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Datasets/Read_Multiple_Files.mpc|3|9|Pf|@{0|}}
+{30001002|XXparameter|transform|type input_type=void(big endian integer(8));
+
+/*
+ * Add the AI_SERIAL path to the filename given by in.filename.
+ */
+filename::get_filename(in)=
+begin
+ filename :: string_concat($"AI_SERIAL", '/', in.filename);
+end;
+
+out :: reformat(read, filename, in) =
+begin
+  out.filename :: filename;
+  out.json_data :: read;
+end;|3|9||@{0|}}
+{30001002|XXparameter|read_blocks|True|3|1|l|@{0|}}
+{30001002|XXparameter|maximum_block_bytes|8192|3|2|$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|eme_dataset_mapping|$[[record map_component 0 datasets NULL]]|3|9||@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata|record
+  string(int) filename;
+  void(big endian integer(8)) json_data;
+end;|3|1|l|@{0|}}
+{30001002|XXparameter|filereject_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|fileerror_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@1|Read Multiple Files|198000|545000|0|0|0|0|0|Read Multiple Files: Generated JSON files|Ab Initio Software|Built-in 2.11.8:|1|100|0||6||32769|1|{1|0|}}}
+{2010203004|XXGoport|93|0|236|0|{@{}@0|0|0|0|out|0.0|@@@2452|0|}}
+{2010203004|XXGoport|94|0|239|0|{@{}@0|0|0|0|filereject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|95|0|241|0|{@{}@0|0|0|0|fileerror|0.0|@@@1168|0|}}
+{2010203004|XXGoport|96|0|243|0|{@{}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|97|0|245|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|98|0|247|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|99|0|249|0|{@{}@0|0|0|0|in|0.0|@@@1556|0|}}
+{2010501005|XXGpvertex|100|0|252|0|{Sequentially reads from a list of input files.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|readfiles|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|/~ab_home/bin/readfiles|3|2|H$||{0|}}
+{30001002|XXparameter|NoHidePorts|in out|3|2|H$||{0|}}
+{30001002|XXparameter|transform||8|1|RFOl|Package containing transforms and data types|{0|}}
+{30001002|XXparameter|filter|None (Read all records)|15|1|Fl|Limits the number of records read from each file|{2|None (Read all records)|Range (Read a subset of records from each file)|}}
+{30001002|XXparameter|skip_count|0|1|2|FK$|Number of initial records to skip|{0|}}
+{30001002|XXparameter|skip_count.display_name|skip-count|3|9|P|@{0|}}
+{30001002|XXparameter|skip_count.keyword|skip-count|3|9|P|@{0|}}
+{30001002|XXparameter|skip_count.condition|param filter Range*|3|15|P?|@{0|}}
+{30001002|XXparameter|read_count|0|1|2|FK$|Number of records to read from each file|{0|}}
+{30001002|XXparameter|read_count.display_name|read-count|3|9|P|@{0|}}
+{30001002|XXparameter|read_count.keyword|read-count|3|9|P|@{0|}}
+{30001002|XXparameter|read_count.condition|param filter Range*|3|15|P?|@{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|error_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|log_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if the reformat transform rejects records read from input files|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* 99.0 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword.condition|version :2.12.999.m999|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp_keyword2|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword2.condition|version 2.13:|3|15|P?|@{0|}}
+{30001002|XXparameter|file_empty|Ignore (continue with no reject or error)|15|1|Fl|What to do if an input file is empty|{4|Fail (Stop processing)|Notify (Continue, with a reject record and error message)|Ignore (continue with no reject or error)|Accept (If reading as single record, produce length-only record with no data)|}}
+{30001002|XXparameter|file_empty.display_name|file-empty|3|9|P|@{0|}}
+{30001002|XXparameter|file_empty.condition|version 2.11.8.m11:|3|15|P?|@{0|}}
+{30001002|XXparameter|file_empty_keyword|value file-empty F* Fail value file-empty N* Notify value file-empty I* Ignore value file-empty A* Accept default dollar_substitution Ignore|3|13|Kv|What to do if an input file is empty|{0|}}
+{30001002|XXparameter|file_empty_keyword.condition|version 2.11.8.m11:|3|15|P?|@{0|}}
+{30001002|XXparameter|file_missing|Fail (Stop processing)|15|1|Fl|What to do if an input file is missing|{3|Fail (Stop processing)|Notify (Continue, with a reject record and error message)|Ignore (continue with no reject or error)|}}
+{30001002|XXparameter|file_missing.display_name|file-missing|3|9|P|@{0|}}
+{30001002|XXparameter|file_missing.condition|version 2.11.8.m11:|3|15|P?|@{0|}}
+{30001002|XXparameter|file_missing_keyword|value file-missing F* Fail value file-missing N* Notify value file-missing I* Ignore default dollar_substitution Fail|3|13|Kv|What to do if an input file is missing|{0|}}
+{30001002|XXparameter|file_missing_keyword.condition|version 2.11.8.m11:|3|15|P?|@{0|}}
+{30001002|XXparameter|file_unavailable|Fail (Stop processing)|15|1|Fl|What to do if the input file is not readable or is otherwise unavailable|{3|Fail (Stop processing)|Notify (Continue, with a reject record and error message)|Ignore (continue with no reject or error)|}}
+{30001002|XXparameter|file_unavailable.display_name|file-unavailable|3|9|P|@{0|}}
+{30001002|XXparameter|file_unavailable_keyword|value file-unavailable F* Fail value file-unavailable N* Notify value file-unavailable I* Ignore value file-unavailable A* Accept default dollar_substitution Fail|3|13|Kv|What to do if the input file is not readable or is otherwise unavailable|{0|}}
+{30001002|XXparameter|filename_error|Fail (Stop processing)|15|1|Fl|What to do with an input record when get_filename() fails|{3|Fail (Stop processing)|Notify (Continue, with a reject record and error message)|Ignore (continue with no reject or error)|}}
+{30001002|XXparameter|filename_error.display_name|filename-error|3|9|P|@{0|}}
+{30001002|XXparameter|filename_error.condition|version 2.11.8.m11:|3|15|P?|@{0|}}
+{30001002|XXparameter|filename_error_keyword|value filename-error F* Fail value filename-error N* Notify value filename-error I* Ignore default dollar_substitution Fail|3|13|Kv|What to do if an input file is missing|{0|}}
+{30001002|XXparameter|filename_error_keyword.condition|version 2.11.8.m11:|3|15|P?|@{0|}}
+{30001002|XXparameter|input_error|Fail (Stop processing)|15|1|Fl|What to do in case of error reading an input file|{3|Fail (Stop processing)|Notify (Continue, with a reject record and error message)|Ignore (continue with no reject or error)|}}
+{30001002|XXparameter|input_error.display_name|input-error|3|9|P|@{0|}}
+{30001002|XXparameter|input_error.condition|version 2.14.70:|3|15|P?|@{0|}}
+{30001002|XXparameter|input_error_keyword|value input-error F* Fail value input-error N* Notify value input-error I* Ignore default dollar_substitution Fail|3|13|Kv|What to do in case of error reading an input file|{0|}}
+{30001002|XXparameter|input_error_keyword.condition|version 2.14.70:|3|15|P?|@{0|}}
+{30001002|XXparameter|stream_raw_data|False|13|1|FKl|If True, streams raw data from input files|{0|}}
+{30001002|XXparameter|stream_raw_data.condition|version 3.2.1.r10.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|interpret_hadoop_data|False|13|1|Fl|If true, component will interpret data according to the selected Hadoop file format.|{0|}}
+{30001002|XXparameter|interpret_hadoop_data.condition|version 3.2.2.r15.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|format|uninterpreted|15|1|FKl|The input file format: 'uninterpreted' (read raw data), 'seqfile' (Hadoop sequence file), 'parquet' (Parquet format), 'orc' (ORC format), 'rcfile' (RCFile format), 'avro' (Avro format), 'texttable' (Hive text table).|{7|uninterpreted|seqfile|parquet|orc|rcfile|avro|texttable|}}
+{30001002|XXparameter|format.condition|param_exact interpret_hadoop_data True param_exact stream_raw_data False version 3.2.2.r15.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|select_columns_condition|value format rcfile True value format * False default constant False|13|13|v|Hidden condition for deciding select-columns visibility|{0|}}
+{30001002|XXparameter|select_columns||3|2|FK$|A comma-separated list of column number to read from RC File. Column numbers are zero-based.|{0|}}
+{30001002|XXparameter|select_columns.display_name|select-columns|3|9|P|@{0|}}
+{30001002|XXparameter|select_columns.keyword|select-columns|3|9|P|@{0|}}
+{30001002|XXparameter|select_columns.condition|param select_columns_condition True|3|15|P?|@{0|}}
+{30001002|XXparameter|schema_file||3|2|FK$|Location of schema file for reading avro files, prefix with file: or hdfs:. If not specified, data will be read using the schema in the data file.|{0|}}
+{30001002|XXparameter|schema_file.display_name|schema-file|3|9|P|@{0|}}
+{30001002|XXparameter|schema_file.keyword|schema-file|3|9|P|@{0|}}
+{30001002|XXparameter|schema_file.condition|param format avro|3|15|P?|@{0|}}
+{30001002|XXparameter|predicate_filter||20|2|FK$|Pushdown predicate filter for orc and parquet|{0|}}
+{30001002|XXparameter|predicate_filter.display_name|predicate-filter|3|9|P|@{0|}}
+{30001002|XXparameter|predicate_filter.keyword|predicate-filter|3|9|P|@{0|}}
+{30001002|XXparameter|predicate_filter.condition|param format parquet|3|15|P?|@{0|}}
+{30001002|XXparameter|read_options||3|2|FK$|Additional options to pass to the Hadoop reader. The format is a comma separated list of name=value pairs.|{0|}}
+{30001002|XXparameter|read_options.display_name|read-options|3|9|P|@{0|}}
+{30001002|XXparameter|read_options.keyword|read-options|3|9|P|@{0|}}
+{30001002|XXparameter|read_options.condition|param interpret_hadoop_data True|3|15|P?|@{0|}}
+{30001002|XXparameter|compressed|False|13|1|FKl|If True, reads compressed input files|{0|}}
+{30001002|XXparameter|compressed.condition|param_exact stream_raw_data False param_exact format uninterpreted version 2.12.2.m1:|3|15|P?|@{0|}}
+{30001002|XXparameter|read_as_single_record|False|13|1|FKl|If True, reads each file as one record, adding an initial 8-byte size|{0|}}
+{30001002|XXparameter|read_as_single_record.condition|param_exact stream_raw_data False param_exact read-blocks False param_exact format uninterpreted version 2.12.2.m5:|3|15|P?|@{0|}}
+{30001002|XXparameter|read_blocks|False|13|1|FKl|If True, reads each file as a series of blocks, adding an initial 8-byte size to each block|{0|}}
+{30001002|XXparameter|read_blocks.display_name|read-blocks|3|9|P|@{0|}}
+{30001002|XXparameter|read_blocks.keyword|read-blocks|3|9|P|@{0|}}
+{30001002|XXparameter|read_blocks.condition|param_exact stream_raw_data False param_exact read_as_single_record False param_exact format uninterpreted version 2.14.25:|3|15|P?|@{0|}}
+{30001002|XXparameter|maximum_block_bytes|-1|1|2|FK$|Block size when read-blocks is True. A value of -1 reads the entire file.|{0|}}
+{30001002|XXparameter|maximum_block_bytes.display_name|maximum-block-bytes|3|9|P|@{0|}}
+{30001002|XXparameter|maximum_block_bytes.keyword|maximum-block-bytes|3|9|P|@{0|}}
+{30001002|XXparameter|maximum_block_bytes.condition|param_exact read-blocks True version 2.14.25:|3|15|P?|@{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp ramp_keyword2 ramp file_empty_keyword file-empty file_missing_keyword file-missing file_unavailable_keyword file-unavailable filename_error_keyword filename-error input_error_keyword input-error|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_intermediate||15|1|Fl|Frequency of intermediate records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_intermediate.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|num_variables|1|1|2|H$|Number of data types in package|{0|}}
+{30001002|XXparameter|variable1|optional input_type read <parameter out_metadata>|3|2|H$|Metadata for records read from input files|{0|}}
+{30001002|XXparameter|num_types|3|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|filename_type filename "string('', charset='x-ab-internal')"|3|2|H$|Metadata for get_filename result|{0|}}
+{30001002|XXparameter|num_operations|9|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|operation1|filename::get_filename(in)|3|2|H$|extract filename from input record|{0|}}
+{30001002|XXparameter|operation2|optional long out::finished(read, filename, in)|3|2|H$|Check if done reading file|{0|}}
+{30001002|XXparameter|operation2_analysis|optional long finished_out::finished(read, filename, in)|3|2|H$|Check if done reading file|{0|}}
+{30001002|XXparameter|operation3|optional out::reformat(read, filename, in)|3|2|H$|Create output record|{0|}}
+{30001002|XXparameter|operation3_analysis|optional out::reformat(read, filename, in optional)|3|2|H$||{0|}}
+{30001002|XXparameter|operation4|optional read::repair_input(void(integer(4)) rawbytes, filename)|3|2|H$|Repair malformed input record from file|{0|}}
+{30001002|XXparameter|type1_analysis|filename_type filename "string('', charset='x-ab-internal')"|3|2|H$||{0|}}
+{30001002|XXparameter|variable1_analysis|optional input_type read <parameter out_metadata>|3|2|H$||{0|}}
+{30001002|XXparameter|port_analysis|reject=^read ; out=^read; filereject=in|3|2|H$||{0|}}
+{30001002|XXparameter|dataset_analysis|eme_dataset(file)=read,r|3|2|H$||{0|}}
+{30001002|XXparameter|continuous_analysis||3|2|H$||{0|}}
+{30001002|XXparameter|type2|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type3|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|operation5|optional out::output_for_error(error_info, read)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation6|optional error::make_error(error_info, read)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation7|optional log_event::log_error(error_info, read)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation8|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|operation9|optional integer(8) out::output_select(out)|3|2|H$|Select output record.|{0|}}
+{30001002|XXparameter|operation9.condition|version 3.2.1.r10.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation9_analysis|integer(8) output_select_out::output_select(out)|3|2|H$|Select output record.|{0|}}
+{30001002|XXparameter|operation9_analysis.condition|version 3.2.1.r10.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|num_callbacks|4|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|eme_dataset_mapping|@40|9|F|Place in the EME to create the dataset(s) corresponding to this component.|{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|filereject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|fileerror_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|reject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out,filereject,fileerror,reject,error,log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581342|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: filereject = in
+metadata type: fileerror = remote("$AB_HOME/include/error-info.dml")
+metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: log = remote("$AB_HOME/include/log-info.dml")|3|1|HKl|@{0|}}
+{30001002|XXparameter|_propagate_through||3|1|FHKl|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|@15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+}}@0|Read Multiple Files|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|101|0|254|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2452|0|}}
+{2010203004|XXGoport|102|0|257|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|filereject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|103|0|260|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|fileerror|0.0|@@@1168|0|}}
+{2010203004|XXGoport|104|0|263|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|105|0|266|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|106|0|269|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|107|0|272|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1556|0|}}
+{2010501005|XXGpvertex|108|0|280|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Translate/JSON/Read_JSON.mpc|3|9|Pf|@{0|}}
+{30001002|XXparameter|package|/*
+ It would be better to include a file generated by json-to-dml here.
+ This is not done here to avoid having to land a generated DML file in the
+ example. Best practice, however, is to include a landed file.
+*/
+$JSON_DML
+
+out::create_output(in,decoded_json)=
+begin
+ out :: decoded_json;
+end;|3|9||@{0|}}
+{30001002|XXparameter|json_data_field_name|json_data|3|2|$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata|$JSON_DML
+
+metadata type = json_top_t;|3|9||@{0|}}
+{30001002|XXparameter|reject_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|tagreject_metadata|record big endian integer(8) record_number; utf8 string(big endian integer(4)) tag; utf8 string(big endian integer(4)) data; end;|3|1|l|@{0|}}
+}}@1|Read JSON|672000|560500|0|0|0|0|0|Read JSON|Ab Initio Software|Built-in 2.16.1:|1|100|0||6||1|1|{1|0|}}}
+{2010203004|XXGoport|109|0|282|0|{@{}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|110|0|285|0|{@{}@0|0|0|0|tagreject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|111|0|287|0|{@{}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|112|0|289|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|113|0|291|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|114|0|293|0|{@{}@0|0|0|0|in|0.0|@@@1936|0|}}
+{2010501005|XXGpvertex|115|0|296|0|{Parses JavaScript Object Notation records as varstring or varvoids into a flow of records.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|Read_JSON|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|package||8|1|FKl|Functions for message creation|{0|}}
+{30001002|XXparameter|json_data_field_name||3|2|FK$|Name of the varstring or varvoid type field in the input record that contains the JSON data to be parsed. This is required if the input has pass-thru fields.|{0|}}
+{30001002|XXparameter|json_data_field_name.display_name|json-data-field-name|3|9|P|@{0|}}
+{30001002|XXparameter|json_data_field_name.keyword|json-data-field-name|3|9|P|@{0|}}
+{30001002|XXparameter|json_data_field_name.condition|version 3.1.5.r21:|3|15|P?|@{0|}}
+{30001002|XXparameter|ignore_unknown_tags|False|13|1|FKl|Send tags thats do not correspond to the DML to the tagreject port.|{0|}}
+{30001002|XXparameter|ignore_unknown_tags.display_name|ignore-unknown-tags|3|9|P|@{0|}}
+{30001002|XXparameter|ignore_unknown_tags.keyword|ignore-unknown-tags|3|9|P|@{0|}}
+{30001002|XXparameter|allow_all_decimals|False|13|1|FKl|If true, allow any kind of DML decimal type in the output type. Normally, only delimited decimals are allowed.|{0|}}
+{30001002|XXparameter|allow_all_decimals.display_name|allow-all-decimals|3|9|P|@{0|}}
+{30001002|XXparameter|allow_all_decimals.keyword|allow-all-decimals|3|9|P|@{0|}}
+{30001002|XXparameter|allow_all_decimals.condition|version 3.3.1.r3:|3|15|P?|@{0|}}
+{30001002|XXparameter|must_fit|False|13|1|FKl|If true, the input json must fit into the target type. Required in order to support deserializing into a tagged union as described by the oneOf json schema keyword.|{0|}}
+{30001002|XXparameter|must_fit.display_name|must-fit|3|9|P|@{0|}}
+{30001002|XXparameter|must_fit.keyword|must-fit|3|9|P|@{0|}}
+{30001002|XXparameter|must_fit.condition|version 3.5.1.r4.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|num_variables|2|1|2|H$|Number of intermediate types|{0|}}
+{30001002|XXparameter|num_variables.condition|version 3.1.5.r21:|3|15|P?|@{0|}}
+{30001002|XXparameter|variable1|optional json_top_t decoded_json|3|2|H$|Target type for JSON message parsing.|{0|}}
+{30001002|XXparameter|variable1.condition|version 3.1.5.r21:|3|15|P?|@{0|}}
+{30001002|XXparameter|variable2|json_input_type json "utf8 string(integer(4))"|3|2|H$|Type of JSON data to parse -- used by get_json. Do not change this definition.|{0|}}
+{30001002|XXparameter|variable2.condition|version 3.2.1.r10:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation1|optional out::create_output(in, decoded_json)|3|2|H$|Called to create an output record. This is required if the input has pass-thru fields or if get_json() is defined.|{0|}}
+{30001002|XXparameter|operation1.condition|version 3.1.5.r21:|3|15|P?|@{0|}}
+{30001002|XXparameter|operation2|optional json::get_json(in)|3|2|H$|Called to get the JSON record from the input if the json record is not available as a top-level field in the input record. |{0|}}
+{30001002|XXparameter|operation2.condition|version 3.2.1.r10:|3|15|P?|@{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|port_analysis|out=all_to_all(in)|3|2|H$||{0|}}
+{30001002|XXparameter|continuous_analysis||3|2|H$||{0|}}
+{30001002|XXparameter|num_types|2|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type2|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|operation3|optional out::output_for_error(error_info, in)|3|2|H$|Function to create output in case of error.|{0|}}
+{30001002|XXparameter|operation4|optional error::make_error(error_info, in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation5|optional log_event::log_error(error_info, in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation6|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|num_operations|6|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|num_callbacks|4|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|tagreject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|reject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out,tagreject,reject,error,log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581349|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: log = remote("$AB_HOME/include/log-info.dml")
+metadata type: tagreject = "record big endian integer(8) record_number; utf8 string(big endian integer(4)) tag; utf8 string(big endian integer(4)) data; end;"
+metadata type: reject = in|3|1|HKl|@{0|}}
+{30001002|XXparameter|_propagate_through||3|1|FHKl|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|@15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+}}@0|Read JSON|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|116|0|298|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2448|0|}}
+{2010203004|XXGoport|117|0|301|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|tagreject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|118|0|304|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|119|0|307|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|120|0|310|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|121|0|313|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1936|0|}}
+{2010501005|XXGpvertex|122|0|320|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Miscellaneous/Replicate.mpc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|out_metadata||3|8|s=|@{0|}}
+}}@0|Replicate|423000|285000|0|0|0|0|0|Replicate|Ab Initio Software|Built-in 1.0:|1|100|0||6||32769|1|{1|0|}}}
+{2010203004|XXGoport|123|0|322|0|{@{}@0|0|0|0|out|0.0|@@@2068|0|}}
+{2010202004|XXGiport|124|0|326|0|{@{}@0|0|0|0|in|0.0|@@@1812|0|}}
+{2010501005|XXGpvertex|125|0|329|0|{Arbitrarily combines all the data records it receives into a single flow and writes a copy of that flow to each of its output flows.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|broadcast|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|NoHidePorts|in out|3|2|H$||{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort|in|3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort|out|3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Replace with flow|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|port_analysis|out=exact(in)|3|2|H$||{0|}}
+{30001002|XXparameter|continuous_analysis|broadcast, publisher|3|2|H$||{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|out_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|out::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581347|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagate_through|metadata type: out = in
+metadata type: in = out|3|1|FHKl|@{0|}}
+}}@0|Replicate|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|126|0|331|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|out|0.0|@@@2068|0|}}
+{2010202004|XXGiport|127|0|334|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1812|0|}}
+{2010501005|XXGpvertex|128|0|340|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Miscellaneous/Trash.mpc|3|2|Pf$|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+}}@1|Trash|873000|570000|0|0|0|0|0|Trash-1|Ab Initio Software|Built-in 1.0:|1|100|0||6||32769|1|{1|0|}}}
+{2010202004|XXGiport|129|0|342|0|{@{}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010501005|XXGpvertex|130|0|345|0|{Ends a flow by discarding all input data records.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|broadcast|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|~ab_home/bin/unitool|3|2|H$||{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|Remove completely|15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|continuous_analysis|broadcast, publisher, fan_in_ok|3|2|H$||{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581347|1|1|Hl|The last modification time of this component's template|{0|}}
+}}@0|Trash|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010202004|XXGiport|131|0|347|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010501005|XXGpvertex|132|0|353|0|{|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|!prototype_path|$AB_COMPONENTS/Datasets/Write_Multiple_Files.mpc|3|9|Pf|@{0|}}
+{30001002|XXparameter|transform|// This is the output type of the reformat function.
+type output_type = void(big endian integer(8));
+
+// The generated filename created in get_filename
+let string(int) generated_filename = "";
+
+// If start_new_file is non-zero, use the in.filename field to generate a filename. 
+// Otherwise use the last one that was generated.
+filename::get_filename(in)=
+begin
+  if (in.start_new_file)
+    generated_filename = string_concat($"AI_SERIAL", '/', in.filename);
+  else if (length_of(generated_filename) == 0)
+    force_error("Expected start_new_file to be non-zero at the beginning of the unit of work.");
+  
+  filename :: generated_filename;
+end;
+
+/* This function creates the length-prefixed void that contains the
+ * Avro data block. After the function executes, the length prefix
+ * is removed because the write-stripped parameter is set 
+ * to "Strip length prefix or delimiter".
+ */
+write::reformat(in)=
+begin
+  write :: in.json_data;
+end;|3|9||@{0|}}
+{30001002|XXparameter|write_stripped|Strip length prefix or delimiter|3|1|l|@{0|}}
+{30001002|XXparameter|Layout||3|8|s=|@{0|}}
+{30001002|XXparameter|eme_dataset_mapping|$[[record map_component 0 datasets NULL]]|3|9||@{0|}}
+{30001002|XXparameter|in_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|reject_metadata||3|8|s=|@{0|}}
+{30001002|XXparameter|error_metadata|$AB_HOME/include/error-info.dml|3|2|f$|@{0|}}
+{30001002|XXparameter|log_metadata|$AB_HOME/include/log-info.dml|3|2|f$|@{0|}}
+}}@0|Write Multiple Files|571000|252500|0|0|0|0|0|Write Multiple Files: JSON data|Ab Initio Software|Built-in 2.11.8:|1|100|0||6||32769|1|{1|0|}}}
+{2010203004|XXGoport|133|0|355|0|{@{}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|134|0|357|0|{@{}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|135|0|359|0|{@{}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|136|0|361|0|{@{}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010501005|XXGpvertex|137|0|364|0|{Writes records to a set of output files.|{30100001|XXparameter_set|@@@@{{30001002|XXparameter|mpname|writefiles|3|1|Hl||{0|}}
+{30001002|XXparameter|image__|/~ab_home/bin/writefiles|3|2|H$||{0|}}
+{30001002|XXparameter|format|uninterpreted|15|1|RFKl|The output file format: 'uninterpreted' (raw data), 'orc' (ORC format), 'parquet' (Parquet format), 'seqfile' (Hadoop sequence file), 'avro' (Avro format), 'texttable' (Hive text table).|{6|uninterpreted|orc|parquet|seqfile|avro|texttable|}}
+{30001002|XXparameter|transform||8|1|RFOl|Package containing transforms and data types|{0|}}
+{30001002|XXparameter|overwrite|True|13|1|FKl|If True, overwrite existing output files. If False, append to existing files.|{0|}}
+{30001002|XXparameter|compressed|False|13|1|FKl|If True, compress output files using AB_DEFAULT_COMPRESSION_LEVEL|{0|}}
+{30001002|XXparameter|compressed.condition|param format uninterpreted|3|15|P?|@{0|}}
+{30001002|XXparameter|hadoopy_condition|value format uninterpreted False value format * True default constant True|13|13|v|Hidden condition for deciding write-options visibility|{0|}}
+{30001002|XXparameter|hadoop_codec|Uncompressed|15|1|FKl|Compression for writing hadoop specific file format. orc=\{ZLIB,SNAPPY,LZO\}, parquet=\{GZIP,SNAPPY,LZO\}, seqfile=\{GZIP,SNAPPY,Deflate,BZIP2,LZ4,LZO\}, avro=\{SNAPPY,Deflate,BZIP2\}, texttable=\{GZIP,SNAPPY,Deflate,BZIP2,LZ4\}|{8|Uncompressed|GZIP|SNAPPY|Deflate|BZIP2|ZLIB|LZ4|LZO|}}
+{30001002|XXparameter|hadoop_codec.display_name|hadoop-codec|3|9|P|@{0|}}
+{30001002|XXparameter|hadoop_codec.keyword|hadoop-codec|3|9|P|@{0|}}
+{30001002|XXparameter|hadoop_codec.condition|param hadoopy_condition True|3|15|P?|@{0|}}
+{30001002|XXparameter|write_options||3|2|FK$|A comma-separated list of key-value pairs. The key-value pair option is format specific.|{0|}}
+{30001002|XXparameter|write_options.display_name|write-options|3|9|P|@{0|}}
+{30001002|XXparameter|write_options.keyword|write-options|3|9|P|@{0|}}
+{30001002|XXparameter|write_options.condition|param hadoopy_condition True|3|15|P?|@{0|}}
+{30001002|XXparameter|schema_file||3|2|FK$|Location of schema file, prefix with file: or hdfs:|{0|}}
+{30001002|XXparameter|schema_file.display_name|schema-file|3|9|P|@{0|}}
+{30001002|XXparameter|schema_file.keyword|schema-file|3|9|P|@{0|}}
+{30001002|XXparameter|schema_file.condition|param format avro|3|15|P?|@{0|}}
+{30001002|XXparameter|write_stripped|Do not strip; retain length prefix or delimiter|15|1|Fl|Controls whether any size prefix or delimiter is removed from records before they are written to the file|{2|Do not strip; retain length prefix or delimiter|Strip length prefix or delimiter|}}
+{30001002|XXparameter|write_stripped.display_name|write-stripped|3|9|P|@{0|}}
+{30001002|XXparameter|write_stripped.condition|version 2.14.9:|3|15|P?|@{0|}}
+{30001002|XXparameter|write_raw_data|value write-stripped Do* 0 value write-stripped Strip* 1 default constant False|13|13|Kv||{0|}}
+{30001002|XXparameter|permissions|660|3|2|FK$|unix-style numeric permissions mask for newly created files|{0|}}
+{30001002|XXparameter|file_limits|Files (Limited by number of output files)|15|1|Fl|Limits the number of files that can be open simultaneously|{3|None (No limits on resource usage)|Memory (Limited by total memory usage)|Files (Limited by number of output files)|}}
+{30001002|XXparameter|file_limits.display_name|file-limits|3|9|P|@{0|}}
+{30001002|XXparameter|max_core|13107200|1|2|FK$|Maximum memory usage (for file output buffers) in bytes. This corresponds to 100 open files|{0|}}
+{30001002|XXparameter|max_core.display_name|max-core|3|9|P|@{0|}}
+{30001002|XXparameter|max_core.keyword|max-core|3|9|P|@{0|}}
+{30001002|XXparameter|max_core.condition|param file-limits Memory*|3|15|P?|@{0|}}
+{30001002|XXparameter|max_files|100|1|2|FK$|Maximum number of simultaneously open files|{0|}}
+{30001002|XXparameter|max_files.display_name|max-files|3|9|P|@{0|}}
+{30001002|XXparameter|max_files.keyword|max-files|3|9|P|@{0|}}
+{30001002|XXparameter|max_files.condition|param file-limits Files*|3|15|P?|@{0|}}
+{30001002|XXparameter|create_directories|False|13|1|FKl|If True, create any parent directories as necessary|{0|}}
+{30001002|XXparameter|create_directories.display_name|create-directories|3|9|P|@{0|}}
+{30001002|XXparameter|create_directories.keyword|create-directories|3|9|P|@{0|}}
+{30001002|XXparameter|create_directories.condition|version 2.15.5.r32:|3|15|P?|@{0|}}
+{30001002|XXparameter|atomic|False|13|1|FKl|If True, file is spooled to temporary, and then renamed atomically|{0|}}
+{30001002|XXparameter|atomic.condition|param overwrite True version 3.1.3.r16.0:|3|15|P?|@{0|}}
+{30001002|XXparameter|error_group||3|2|F$|Optional group name identifying a Handle Errors component to which errors can be directed.|{0|}}
+{30001002|XXparameter|error_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|log_group||3|2|F$|Optional group name of a Handle Logs component to which log output can be directed.|{0|}}
+{30001002|XXparameter|log_group.condition|version 2.16:|3|15|P?|@{0|}}
+{30001002|XXparameter|reject_threshold|Abort on first reject|15|1|Fl|When to abort if input records are rejected|{3|Abort on first reject|Never abort|Use limit/ramp|}}
+{30001002|XXparameter|reject_threshold.display_name|reject-threshold|3|9|P|@{0|}}
+{30001002|XXparameter|limit|0|1|2|F$|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|limit.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp|0.0|2|2|F$|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp.condition|param reject-threshold Use*|3|15|P?|@{0|}}
+{30001002|XXparameter|limit_keyword|value reject-threshold Never* 0 value reject-threshold Abort* 0 sameas limit default dollar_substitution 0|1|13|Kv|Maximum rejected records before failure|{0|}}
+{30001002|XXparameter|ramp_keyword|value reject-threshold Never* 99.0 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword.condition|version :2.12.999.m999|3|15|P?|@{0|}}
+{30001002|XXparameter|ramp_keyword2|value reject-threshold Never* -1 value reject-threshold Abort* 0.0 sameas ramp default dollar_substitution 0.0|2|13|Kv|Rate of rejected records|{0|}}
+{30001002|XXparameter|ramp_keyword2.condition|version 2.13:|3|15|P?|@{0|}}
+{30001002|XXparameter|keyword_map|limit_keyword limit ramp_keyword ramp ramp_keyword2 ramp|3|2|$||{0|}}
+{30001002|XXparameter|keyword_map.display_name|keyword-map|3|9|P|@{0|}}
+{30001002|XXparameter|logging|False|13|1|Fl|Log internal events|{0|}}
+{30001002|XXparameter|log|log_concat|3|13|Kv|Special log parameter|{0|}}
+{30001002|XXparameter|log.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_input||15|1|Fl|Frequency of input records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_input.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_output||15|1|Fl|Frequency of output records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_output.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_reject||15|1|Fl|Frequency of reject records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_reject.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|log_intermediate||15|1|Fl|Frequency of intermediate records to log|{7| |1|10|100|1000|10000|100000|}}
+{30001002|XXparameter|log_intermediate.condition|param logging True|3|15|P?|@{0|}}
+{30001002|XXparameter|empty_type||3|2|H$||{0|}}
+{30001002|XXparameter|num_variables|1|1|2|H$|Number of data types in package|{0|}}
+{30001002|XXparameter|variable1|optional output_type write <parameter in_metadata>|3|2|H$|Metadata for records written to output files|{0|}}
+{30001002|XXparameter|num_types|3|1|2|H$|Number of private data types in package|{0|}}
+{30001002|XXparameter|type1|filename_type filename "string('')"|3|2|H$|Metadata for get_filename result|{0|}}
+{30001002|XXparameter|num_operations|5|1|2|H$|Number of operations in package|{0|}}
+{30001002|XXparameter|operation1|filename::get_filename(in)|3|2|H$|extract filename from input record|{0|}}
+{30001002|XXparameter|operation1_analysis|filename::get_filename(in optional)|3|2|H$||{0|}}
+{30001002|XXparameter|operation2|optional write::reformat(in)|3|2|H$|Create output record|{0|}}
+{30001002|XXparameter|operation2_analysis|write::reformat(in)|3|2|H$||{0|}}
+{30001002|XXparameter|variable1_analysis|optional output_type write <parameter in_metadata>|3|2|H$||{0|}}
+{30001002|XXparameter|type1_analysis|filename_type filename "string('')"|3|2|H$||{0|}}
+{30001002|XXparameter|port_analysis|reject=in; ^write=in;|3|2|H$||{0|}}
+{30001002|XXparameter|dataset_analysis|eme_dataset(file)=write,w|3|2|H$||{0|}}
+{30001002|XXparameter|type2|error_info_t error_info "record string('', charset='x-ab-internal') component; int port_index; string('', charset='x-ab-internal') parameter; string('', charset='x-ab-internal') message; record string('', charset='x-ab-internal') code; int parent_index; record string('', charset='x-ab-internal') name; string('', charset='x-ab-internal') value; end[int] attributes; end[int] details; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|type3|log_event_t log_event "record string('', charset='x-ab-internal') event_type; string('', charset='x-ab-internal') event_text; end"|3|2|H$|Type of error_info|{0|}}
+{30001002|XXparameter|operation3|optional error::make_error(error_info, in)|3|2|H$|Function to create error record in case of error.|{0|}}
+{30001002|XXparameter|operation4|optional log_event::log_error(error_info, in)|3|2|H$|Function to create log record in case of error.|{0|}}
+{30001002|XXparameter|operation5|optional log_event::final_log_output()|3|2|H$|Function to create final log record.|{0|}}
+{30001002|XXparameter|num_callbacks|3|1|2|H$|Number of callbacks in package|{0|}}
+{30001002|XXparameter|_use_rich_error_format|True|13|1|Hl|False means use legacy string newline format|{0|}}
+{30001002|XXparameter|_use_rich_log_format|True|13|1|Hl|False means use legacy native charset format|{0|}}
+{30001002|XXparameter|Layout|@9|9|RFs||{0|}}
+{30001002|XXparameter|eme_dataset_mapping|@40|9|F|Place in the EME to create the dataset(s) corresponding to this component.|{0|}}
+{30001002|XXparameter|in_metadata||7|1|RFsl||{0|}}
+{30001002|XXparameter|reject_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|error_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|log_metadata||7|1|Fsl||{0|}}
+{30001002|XXparameter|doc_transform||8|2|FHs$|Document your transformation for dependency analysis|{0|}}
+{30001002|XXparameter|doc_operation1|reject,error,log::document(in)|3|2|RH$||{0|}}
+{30001002|XXparameter|mpcmodtime|1573581342|1|1|Hl|The last modification time of this component's template|{0|}}
+{30001002|XXparameter|_propagation|metadata type: error = remote("$AB_HOME/include/error-info.dml")
+metadata type: reject = in
+metadata type: log = remote("$AB_HOME/include/log-info.dml")|3|1|HKl|@{0|}}
+{30001002|XXparameter|condition||3|2|F$||{0|}}
+{30001002|XXparameter|condition_interpretation|@15|1|Fl||{2|Replace with flow|Remove completely|}}
+{30001002|XXparameter|condition_interpretation.display_name|condition-interpretation|3|9|P|@{0|}}
+{30001002|XXparameter|conditionInputPort||3|2|F$||{0|}}
+{30001002|XXparameter|conditionOutputPort||3|2|F$||{0|}}
+}}@0|Write Multiple Files|0|0|0|0|0|0|0|@||1|100|-1|@6|@1|1|{1|0|}}}
+{2010203004|XXGoport|138|0|366|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|reject|0.0|@@@1168|0|}}
+{2010203004|XXGoport|139|0|369|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|error|0.0|@@@1176|0|}}
+{2010203004|XXGoport|140|0|372|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|F=||{0|}}
+}}@0|0|0|0|log|0.0|@@@1176|0|}}
+{2010202004|XXGiport|141|0|375|0|{@{30100001|XXparameter_set|@@@@{{30001002|XXparameter|metadata||7|8|RF=||{0|}}
+}}@0|0|0|0|in|0.0|@@@1808|0|}}
+{2010110002|XXGconstant|142|0|381|0|{@{}@{1|2732278|}}}
+{2010002001|XXGdirectory_object_object|0|1|2|0|{XXGgraph|}0|1|}
+{2010704001|XXGgraph_graphinfo_graphinfo|1|0|2|0|{}1|2|}
+{2010706001|XXGgraphinfo_runsettings_runsettings|2|0|4|0|{}2|3|}
+{2010109001|XXGobject_property_value|3|0|6|0|{0|legend_face|92|}2|4|}
+{2010605001|XXGgraph_legend_legend|4|0|8|0|{0|}1|5|}
+{2010241001|XXGlegend_face_face|5|0|10|0|{}5|6|}
+{2010605001|XXGgraph_legend_legend|6|0|12|0|{1|}1|7|}
+{2010241001|XXGlegend_face_face|7|0|14|0|{}7|8|}
+{2010605001|XXGgraph_legend_legend|8|0|16|0|{2|}1|9|}
+{2010241001|XXGlegend_face_face|9|0|18|0|{}9|10|}
+{2010605001|XXGgraph_legend_legend|10|0|20|0|{3|}1|11|}
+{2010241001|XXGlegend_face_face|11|0|22|0|{}11|12|}
+{2010604001|XXGgraph_flow_flow|12|0|24|0|{Flow_1|}1|13|}
+{2010604001|XXGgraph_flow_flow|13|0|26|0|{Flow_2|}1|14|}
+{2010604001|XXGgraph_flow_flow|14|0|28|0|{Flow_3|}1|15|}
+{2010604001|XXGgraph_flow_flow|15|0|30|0|{Flow_4|}1|16|}
+{2010604001|XXGgraph_flow_flow|16|0|32|0|{Flow_5|}1|17|}
+{2010604001|XXGgraph_flow_flow|17|0|34|0|{Flow_6|}1|18|}
+{2010604001|XXGgraph_flow_flow|18|0|36|0|{Flow_7|}1|19|}
+{2010244001|XXGflow_watcher_watcher|19|0|38|0|{}19|20|}
+{2010604001|XXGgraph_flow_flow|20|0|40|0|{Flow_8|}1|21|}
+{2010601001|XXGgraph_vertex_vertex|21|0|42|0|{Create_File_List_for_Read_Multiple_Files|}1|22|}
+{2010604001|XXGgraph_flow_flow|22|0|44|0|{Flow_2|}22|23|}
+{2010604001|XXGgraph_flow_flow|23|0|46|0|{Flow_5|}22|24|}
+{2010601001|XXGgraph_vertex_vertex|24|0|48|0|{Filter_by_Expression_Select_if_start_new_file_is_not_0|}22|25|}
+{2010212001|XXGvertex_oport_oport|25|0|50|0|{0|out|}25|26|}
+{2010213001|XXGoport_dst_flow|26|0|52|0|{0|}26|24|}
+{2010212001|XXGvertex_oport_oport|27|0|53|0|{1|deselect|}25|27|}
+{2010212001|XXGvertex_oport_oport|28|0|55|0|{2|reject|}25|28|}
+{2010212001|XXGvertex_oport_oport|29|0|57|0|{3|error|}25|29|}
+{2010212001|XXGvertex_oport_oport|30|0|59|0|{4|log|}25|30|}
+{2010211001|XXGvertex_iport_iport|31|0|61|0|{0|in|}25|31|}
+{2010007001|XXGobject_proto_object|32|0|63|0|{}25|32|}
+{2010212001|XXGvertex_oport_oport|33|0|65|0|{0|out|}32|33|}
+{2010006001|XXGobject_psameas_object|34|0|67|0|{metadata|out_metadata|1|0|}33|32|}
+{2010212001|XXGvertex_oport_oport|35|0|68|0|{1|deselect|}32|34|}
+{2010006001|XXGobject_psameas_object|36|0|70|0|{metadata|deselect_metadata|1|0|}34|32|}
+{2010212001|XXGvertex_oport_oport|37|0|71|0|{2|reject|}32|35|}
+{2010006001|XXGobject_psameas_object|38|0|73|0|{metadata|reject_metadata|1|0|}35|32|}
+{2010212001|XXGvertex_oport_oport|39|0|74|0|{3|error|}32|36|}
+{2010006001|XXGobject_psameas_object|40|0|76|0|{metadata|error_metadata|1|0|}36|32|}
+{2010212001|XXGvertex_oport_oport|41|0|77|0|{4|log|}32|37|}
+{2010006001|XXGobject_psameas_object|42|0|79|0|{metadata|log_metadata|1|0|}37|32|}
+{2010211001|XXGvertex_iport_iport|43|0|80|0|{0|in|}32|38|}
+{2010006001|XXGobject_psameas_object|44|0|82|0|{metadata|in_metadata|1|0|}38|32|}
+{2010006001|XXGobject_psameas_object|45|0|83|0|{Layout|Layout|0|0|}25|39|}
+{2010211001|XXGvertex_iport_iport|46|0|85|0|{0|write|}39|40|}
+{2010214001|XXGiport_src_flow|47|0|87|0|{0|}40|23|}
+{2010007001|XXGobject_proto_object|48|0|88|0|{}39|41|}
+{2010211001|XXGvertex_iport_iport|49|0|90|0|{0|write|}41|42|}
+{2010006001|XXGobject_psameas_object|50|0|92|0|{metadata|write_metadata|1|0|}42|41|}
+{2010006001|XXGobject_psameas_object|51|0|93|0|{write_metadata|out0_metadata|0|0|}39|43|}
+{2010212001|XXGvertex_oport_oport|52|0|95|0|{0|out0|}43|44|}
+{2010213001|XXGoport_dst_flow|53|0|97|0|{0|}44|23|}
+{2010212001|XXGvertex_oport_oport|54|0|98|0|{1|reject0|}43|45|}
+{2010212001|XXGvertex_oport_oport|55|0|100|0|{2|error0|}43|46|}
+{2010212001|XXGvertex_oport_oport|56|0|102|0|{3|log|}43|47|}
+{2010211001|XXGvertex_iport_iport|57|0|104|0|{0|in|}43|48|}
+{2010214001|XXGiport_src_flow|58|0|106|0|{0|}48|24|}
+{2010007001|XXGobject_proto_object|59|0|107|0|{}43|49|}
+{2010212001|XXGvertex_oport_oport|60|0|109|0|{0|out0|}49|50|}
+{2010006001|XXGobject_psameas_object|61|0|111|0|{metadata|out0_metadata|1|0|}50|49|}
+{2010006001|XXGobject_psameas_object|62|0|112|0|{transform0|transform0|1|0|}50|49|}
+{2010212001|XXGvertex_oport_oport|63|0|113|0|{1|reject0|}49|51|}
+{2010006001|XXGobject_psameas_object|64|0|115|0|{metadata|reject0_metadata|1|0|}51|49|}
+{2010212001|XXGvertex_oport_oport|65|0|116|0|{2|error0|}49|52|}
+{2010006001|XXGobject_psameas_object|66|0|118|0|{metadata|error0_metadata|1|0|}52|49|}
+{2010212001|XXGvertex_oport_oport|67|0|119|0|{3|log|}49|53|}
+{2010006001|XXGobject_psameas_object|68|0|121|0|{metadata|log_metadata|1|0|}53|49|}
+{2010211001|XXGvertex_iport_iport|69|0|122|0|{0|in|}49|54|}
+{2010006001|XXGobject_psameas_object|70|0|124|0|{metadata|in_metadata|1|0|}54|49|}
+{2010006001|XXGobject_psameas_object|71|0|125|0|{Layout|Layout|0|0|}43|39|}
+{2010006001|XXGobject_psameas_object|72|0|126|0|{in_metadata|out_metadata|0|0|}43|55|}
+{2010212001|XXGvertex_oport_oport|73|0|128|0|{0|out|}55|56|}
+{2010213001|XXGoport_dst_flow|74|0|130|0|{0|}56|15|}
+{2010212001|XXGvertex_oport_oport|75|0|131|0|{1|reject|}55|57|}
+{2010212001|XXGvertex_oport_oport|76|0|133|0|{2|error|}55|58|}
+{2010212001|XXGvertex_oport_oport|77|0|135|0|{3|log|}55|59|}
+{2010211001|XXGvertex_iport_iport|78|0|137|0|{0|in|}55|60|}
+{2010214001|XXGiport_src_flow|79|0|139|0|{0|}60|13|}
+{2010007001|XXGobject_proto_object|80|0|140|0|{}55|61|}
+{2010212001|XXGvertex_oport_oport|81|0|142|0|{0|out|}61|62|}
+{2010006001|XXGobject_psameas_object|82|0|144|0|{metadata|out_metadata|1|0|}62|61|}
+{2010212001|XXGvertex_oport_oport|83|0|145|0|{1|reject|}61|63|}
+{2010006001|XXGobject_psameas_object|84|0|147|0|{metadata|reject_metadata|1|0|}63|61|}
+{2010212001|XXGvertex_oport_oport|85|0|148|0|{2|error|}61|64|}
+{2010006001|XXGobject_psameas_object|86|0|150|0|{metadata|error_metadata|1|0|}64|61|}
+{2010212001|XXGvertex_oport_oport|87|0|151|0|{3|log|}61|65|}
+{2010006001|XXGobject_psameas_object|88|0|153|0|{metadata|log_metadata|1|0|}65|61|}
+{2010211001|XXGvertex_iport_iport|89|0|154|0|{0|in|}61|66|}
+{2010006001|XXGobject_psameas_object|90|0|156|0|{metadata|in_metadata|1|0|}66|61|}
+{2010006001|XXGobject_psameas_object|91|0|157|0|{Layout|Layout|0|0|}55|39|}
+{2010006001|XXGobject_psameas_object|92|0|158|0|{in_metadata|out_metadata|0|0|}55|67|}
+{2010212001|XXGvertex_oport_oport|93|0|160|0|{0|out|}67|68|}
+{2010213001|XXGoport_dst_flow|94|0|162|0|{0|}68|13|}
+{2010212001|XXGvertex_oport_oport|95|0|163|0|{1|error|}67|69|}
+{2010212001|XXGvertex_oport_oport|96|0|165|0|{2|log|}67|70|}
+{2010007001|XXGobject_proto_object|97|0|167|0|{}67|71|}
+{2010212001|XXGvertex_oport_oport|98|0|169|0|{0|out|}71|72|}
+{2010006001|XXGobject_psameas_object|99|0|171|0|{metadata|out_metadata|1|0|}72|71|}
+{2010212001|XXGvertex_oport_oport|100|0|172|0|{1|error|}71|73|}
+{2010006001|XXGobject_psameas_object|101|0|174|0|{metadata|error_metadata|1|0|}73|71|}
+{2010212001|XXGvertex_oport_oport|102|0|175|0|{2|log|}71|74|}
+{2010006001|XXGobject_psameas_object|103|0|177|0|{metadata|log_metadata|1|0|}74|71|}
+{2010006001|XXGobject_psameas_object|104|0|178|0|{Layout|Layout|0|0|}67|39|}
+{2010006001|XXGobject_psameas_object|105|0|179|0|{reject_metadata|out_metadata|0|0|}55|67|}
+{2010006001|XXGobject_psameas_object|106|0|180|0|{reject0_metadata|out_metadata|0|0|}43|55|}
+{2010006001|XXGobject_psameas_object|107|0|181|0|{deselect_metadata|out_metadata|0|0|}25|55|}
+{2010006001|XXGobject_psameas_object|108|0|182|0|{in_metadata|out_metadata|0|0|}25|55|}
+{2010006001|XXGobject_psameas_object|109|0|183|0|{out_metadata|out_metadata|0|0|}25|55|}
+{2010006001|XXGobject_psameas_object|110|0|184|0|{reject_metadata|out_metadata|0|0|}25|55|}
+{2010601001|XXGgraph_vertex_vertex|111|0|185|0|{Generated_List_for_Read_Multiple_Files|}22|39|}
+{2010601001|XXGgraph_vertex_vertex|112|0|186|0|{Reduce_to_filename|}22|43|}
+{2010211001|XXGvertex_iport_iport|113|0|187|0|{0|in0|}22|75|}
+{2010215002|XXGiport_binding_iport|114|0|189|0|{.5|.5|{0|}62|}75|31|}
+{2010214001|XXGiport_src_flow|115|0|190|0|{0|}75|14|}
+{2010601001|XXGgraph_vertex_vertex|116|0|191|0|{Create_Random_Data|}1|67|}
+{2010601001|XXGgraph_vertex_vertex|117|0|192|0|{Extract_JSON_Message|}1|76|}
+{2010212001|XXGvertex_oport_oport|118|0|194|0|{0|out|}76|77|}
+{2010213001|XXGoport_dst_flow|119|0|196|0|{0|}77|18|}
+{2010212001|XXGvertex_oport_oport|120|0|197|0|{1|reject|}76|78|}
+{2010212001|XXGvertex_oport_oport|121|0|199|0|{2|error|}76|79|}
+{2010212001|XXGvertex_oport_oport|122|0|201|0|{3|log|}76|80|}
+{2010211001|XXGvertex_iport_iport|123|0|203|0|{0|in|}76|81|}
+{2010214001|XXGiport_src_flow|124|0|205|0|{0|}81|16|}
+{2010007001|XXGobject_proto_object|125|0|206|0|{}76|82|}
+{2010212001|XXGvertex_oport_oport|126|0|208|0|{0|out|}82|83|}
+{2010006001|XXGobject_psameas_object|127|0|210|0|{metadata|out_metadata|1|0|}83|82|}
+{2010212001|XXGvertex_oport_oport|128|0|211|0|{1|reject|}82|84|}
+{2010006001|XXGobject_psameas_object|129|0|213|0|{metadata|reject_metadata|1|0|}84|82|}
+{2010212001|XXGvertex_oport_oport|130|0|214|0|{2|error|}82|85|}
+{2010006001|XXGobject_psameas_object|131|0|216|0|{metadata|error_metadata|1|0|}85|82|}
+{2010212001|XXGvertex_oport_oport|132|0|217|0|{3|log|}82|86|}
+{2010006001|XXGobject_psameas_object|133|0|219|0|{metadata|log_metadata|1|0|}86|82|}
+{2010211001|XXGvertex_iport_iport|134|0|220|0|{0|in|}82|87|}
+{2010006001|XXGobject_psameas_object|135|0|222|0|{metadata|in_metadata|1|0|}87|82|}
+{2010006001|XXGobject_psameas_object|136|0|223|0|{Layout|Layout|0|0|}76|88|}
+{2010212001|XXGvertex_oport_oport|137|0|225|0|{0|read|}88|89|}
+{2010213001|XXGoport_dst_flow|138|0|227|0|{0|}89|21|}
+{2010007001|XXGobject_proto_object|139|0|228|0|{}88|90|}
+{2010212001|XXGvertex_oport_oport|140|0|230|0|{0|read|}90|91|}
+{2010006001|XXGobject_psameas_object|141|0|232|0|{metadata|read_metadata|1|0|}91|90|}
+{2010006001|XXGobject_psameas_object|142|0|233|0|{in_metadata|out_metadata|0|0|}76|92|}
+{2010212001|XXGvertex_oport_oport|143|0|235|0|{0|out|}92|93|}
+{2010213001|XXGoport_dst_flow|144|0|237|0|{0|}93|16|}
+{2010212001|XXGvertex_oport_oport|145|0|238|0|{1|filereject|}92|94|}
+{2010212001|XXGvertex_oport_oport|146|0|240|0|{2|fileerror|}92|95|}
+{2010212001|XXGvertex_oport_oport|147|0|242|0|{3|reject|}92|96|}
+{2010212001|XXGvertex_oport_oport|148|0|244|0|{4|error|}92|97|}
+{2010212001|XXGvertex_oport_oport|149|0|246|0|{5|log|}92|98|}
+{2010211001|XXGvertex_iport_iport|150|0|248|0|{0|in|}92|99|}
+{2010214001|XXGiport_src_flow|151|0|250|0|{0|}99|21|}
+{2010007001|XXGobject_proto_object|152|0|251|0|{}92|100|}
+{2010212001|XXGvertex_oport_oport|153|0|253|0|{0|out|}100|101|}
+{2010006001|XXGobject_psameas_object|154|0|255|0|{metadata|out_metadata|1|0|}101|100|}
+{2010212001|XXGvertex_oport_oport|155|0|256|0|{1|filereject|}100|102|}
+{2010006001|XXGobject_psameas_object|156|0|258|0|{metadata|filereject_metadata|1|0|}102|100|}
+{2010212001|XXGvertex_oport_oport|157|0|259|0|{2|fileerror|}100|103|}
+{2010006001|XXGobject_psameas_object|158|0|261|0|{metadata|fileerror_metadata|1|0|}103|100|}
+{2010212001|XXGvertex_oport_oport|159|0|262|0|{3|reject|}100|104|}
+{2010006001|XXGobject_psameas_object|160|0|264|0|{metadata|reject_metadata|1|0|}104|100|}
+{2010212001|XXGvertex_oport_oport|161|0|265|0|{4|error|}100|105|}
+{2010006001|XXGobject_psameas_object|162|0|267|0|{metadata|error_metadata|1|0|}105|100|}
+{2010212001|XXGvertex_oport_oport|163|0|268|0|{5|log|}100|106|}
+{2010006001|XXGobject_psameas_object|164|0|270|0|{metadata|log_metadata|1|0|}106|100|}
+{2010211001|XXGvertex_iport_iport|165|0|271|0|{0|in|}100|107|}
+{2010006001|XXGobject_psameas_object|166|0|273|0|{metadata|in_metadata|1|0|}107|100|}
+{2010006001|XXGobject_psameas_object|167|0|274|0|{Layout|Layout|0|0|}92|88|}
+{2010006001|XXGobject_psameas_object|168|0|275|0|{filereject_metadata|read_metadata|0|0|}92|88|}
+{2010006001|XXGobject_psameas_object|169|0|276|0|{in_metadata|read_metadata|0|0|}92|88|}
+{2010006001|XXGobject_psameas_object|170|0|277|0|{reject_metadata|out_metadata|0|0|}76|92|}
+{2010601001|XXGgraph_vertex_vertex|171|0|278|0|{Input_File_Generated_file_list|}1|88|}
+{2010601001|XXGgraph_vertex_vertex|172|0|279|0|{Read_JSON|}1|108|}
+{2010212001|XXGvertex_oport_oport|173|0|281|0|{0|out|}108|109|}
+{2010213001|XXGoport_dst_flow|174|0|283|0|{0|}109|19|}
+{2010212001|XXGvertex_oport_oport|175|0|284|0|{1|tagreject|}108|110|}
+{2010212001|XXGvertex_oport_oport|176|0|286|0|{2|reject|}108|111|}
+{2010212001|XXGvertex_oport_oport|177|0|288|0|{3|error|}108|112|}
+{2010212001|XXGvertex_oport_oport|178|0|290|0|{4|log|}108|113|}
+{2010211001|XXGvertex_iport_iport|179|0|292|0|{0|in|}108|114|}
+{2010214001|XXGiport_src_flow|180|0|294|0|{0|}114|18|}
+{2010007001|XXGobject_proto_object|181|0|295|0|{}108|115|}
+{2010212001|XXGvertex_oport_oport|182|0|297|0|{0|out|}115|116|}
+{2010006001|XXGobject_psameas_object|183|0|299|0|{metadata|out_metadata|1|0|}116|115|}
+{2010212001|XXGvertex_oport_oport|184|0|300|0|{1|tagreject|}115|117|}
+{2010006001|XXGobject_psameas_object|185|0|302|0|{metadata|tagreject_metadata|1|0|}117|115|}
+{2010212001|XXGvertex_oport_oport|186|0|303|0|{2|reject|}115|118|}
+{2010006001|XXGobject_psameas_object|187|0|305|0|{metadata|reject_metadata|1|0|}118|115|}
+{2010212001|XXGvertex_oport_oport|188|0|306|0|{3|error|}115|119|}
+{2010006001|XXGobject_psameas_object|189|0|308|0|{metadata|error_metadata|1|0|}119|115|}
+{2010212001|XXGvertex_oport_oport|190|0|309|0|{4|log|}115|120|}
+{2010006001|XXGobject_psameas_object|191|0|311|0|{metadata|log_metadata|1|0|}120|115|}
+{2010211001|XXGvertex_iport_iport|192|0|312|0|{0|in|}115|121|}
+{2010006001|XXGobject_psameas_object|193|0|314|0|{metadata|in_metadata|1|0|}121|115|}
+{2010006001|XXGobject_psameas_object|194|0|315|0|{Layout|Layout|0|0|}108|88|}
+{2010006001|XXGobject_psameas_object|195|0|316|0|{in_metadata|out_metadata|0|0|}108|76|}
+{2010006001|XXGobject_psameas_object|196|0|317|0|{reject_metadata|out_metadata|0|0|}108|76|}
+{2010601001|XXGgraph_vertex_vertex|197|0|318|0|{Read_Multiple_Files_Generated_JSON_files|}1|92|}
+{2010601001|XXGgraph_vertex_vertex|198|0|319|0|{Replicate|}1|122|}
+{2010212001|XXGvertex_oport_oport|199|0|321|0|{0|out|}122|123|}
+{2010213001|XXGoport_dst_flow|200|0|323|0|{0|}123|14|}
+{2010213001|XXGoport_dst_flow|201|0|324|0|{1|}123|17|}
+{2010211001|XXGvertex_iport_iport|202|0|325|0|{0|in|}122|124|}
+{2010214001|XXGiport_src_flow|203|0|327|0|{0|}124|15|}
+{2010007001|XXGobject_proto_object|204|0|328|0|{}122|125|}
+{2010212001|XXGvertex_oport_oport|205|0|330|0|{0|out|}125|126|}
+{2010006001|XXGobject_psameas_object|206|0|332|0|{metadata|out_metadata|1|0|}126|125|}
+{2010211001|XXGvertex_iport_iport|207|0|333|0|{0|in|}125|127|}
+{2010006001|XXGobject_psameas_object|208|0|335|0|{metadata|in_metadata|1|0|}127|125|}
+{2010006001|XXGobject_psameas_object|209|0|336|0|{Layout|Layout|0|0|}122|39|}
+{2010006001|XXGobject_psameas_object|210|0|337|0|{in_metadata|out_metadata|0|0|}122|55|}
+{2010006001|XXGobject_psameas_object|211|0|338|0|{out_metadata|out_metadata|0|0|}122|55|}
+{2010601001|XXGgraph_vertex_vertex|212|0|339|0|{Trash_1|}1|128|}
+{2010211001|XXGvertex_iport_iport|213|0|341|0|{0|in|}128|129|}
+{2010214001|XXGiport_src_flow|214|0|343|0|{0|}129|19|}
+{2010007001|XXGobject_proto_object|215|0|344|0|{}128|130|}
+{2010211001|XXGvertex_iport_iport|216|0|346|0|{0|in|}130|131|}
+{2010006001|XXGobject_psameas_object|217|0|348|0|{metadata|in_metadata|1|0|}131|130|}
+{2010006001|XXGobject_psameas_object|218|0|349|0|{Layout|Layout|0|0|}128|88|}
+{2010006001|XXGobject_psameas_object|219|0|350|0|{in_metadata|out_metadata|0|0|}128|108|}
+{2010601001|XXGgraph_vertex_vertex|220|0|351|0|{Write_JSON|}1|55|}
+{2010601001|XXGgraph_vertex_vertex|221|0|352|0|{Write_Multiple_Files_JSON_data|}1|132|}
+{2010212001|XXGvertex_oport_oport|222|0|354|0|{0|reject|}132|133|}
+{2010212001|XXGvertex_oport_oport|223|0|356|0|{1|error|}132|134|}
+{2010212001|XXGvertex_oport_oport|224|0|358|0|{2|log|}132|135|}
+{2010211001|XXGvertex_iport_iport|225|0|360|0|{0|in|}132|136|}
+{2010214001|XXGiport_src_flow|226|0|362|0|{0|}136|17|}
+{2010007001|XXGobject_proto_object|227|0|363|0|{}132|137|}
+{2010212001|XXGvertex_oport_oport|228|0|365|0|{0|reject|}137|138|}
+{2010006001|XXGobject_psameas_object|229|0|367|0|{metadata|reject_metadata|1|0|}138|137|}
+{2010212001|XXGvertex_oport_oport|230|0|368|0|{1|error|}137|139|}
+{2010006001|XXGobject_psameas_object|231|0|370|0|{metadata|error_metadata|1|0|}139|137|}
+{2010212001|XXGvertex_oport_oport|232|0|371|0|{2|log|}137|140|}
+{2010006001|XXGobject_psameas_object|233|0|373|0|{metadata|log_metadata|1|0|}140|137|}
+{2010211001|XXGvertex_iport_iport|234|0|374|0|{0|in|}137|141|}
+{2010006001|XXGobject_psameas_object|235|0|376|0|{metadata|in_metadata|1|0|}141|137|}
+{2010006001|XXGobject_psameas_object|236|0|377|0|{Layout|Layout|0|0|}132|39|}
+{2010006001|XXGobject_psameas_object|237|0|378|0|{in_metadata|out_metadata|0|0|}132|55|}
+{2010006001|XXGobject_psameas_object|238|0|379|0|{reject_metadata|out_metadata|0|0|}132|55|}
+{2010109001|XXGobject_property_value|239|0|380|0|{0|TrackingThumbprint|72|}1|142|}
