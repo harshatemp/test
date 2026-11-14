@@ -1,0 +1,588 @@
+ mp help
+Usage: mp job [ <jobname> ]
+   or: mp reset
+   or: mp show
+   or: mp check
+   or: mp comment <comment text>
+   or: mp -
+   or: mp run [-report verbose-errors]
+              [-report expanded-graph]
+              [-report flows]
+              [-report table-flows]
+              [-report file-percentages]
+              [-report times]
+              [-report spillage]
+              [-report totals]
+              [-report skew[=<n>]]
+              [-report scroll={true|false}]
+              [-report file=<filename>]
+              [-report interval=<n>]
+              [-report show-folding]
+   or: mp file <name> <url> ... [-flags <flags>] [-mode <mode>] [-create-directories] [-mvs_alloc_options <options>] [-format {uninterpreted|orc|parquet|seqfile|avro|texttable}] [-xmf|-rxmf|-xmf_type {relative|absolute}] [-hadoop-codec {none|gzip|bzip2|zlib|snappy|lzo|lz4|deflate}]
+   or: mp ifile <name> <url> ... [-flags <flags>] [-mode <mode>] [-create-directories] [-mvs_alloc_options <options>] [-format {uninterpreted|orc|parquet|seqfile|avro|texttable}]
+   or: mp ofile <name> <url> ... [-flags <flags>] [-mode <mode>] [-create-directories] [-mvs_alloc_options <options>] [-format {uninterpreted|orc|parquet|seqfile|avro|texttable}] [-xmf|-rxmf|-xmf_type {relative|absolute}] [-hadoop-codec {none|gzip|bzip2|zlib|snappy|lzo|lz4|deflate}]
+   or: mp iofile <name> <url> ... [-flags <flags>] [-mode <mode>] [-create-directories] [-mvs_alloc_options <options>] [-format {uninterpreted|orc|parquet|seqfile|avro|texttable}] [-xmf|-rxmf|-xmf_type {relative|absolute}] [-hadoop-codec {none|gzip|bzip2|zlib|snappy|lzo|lz4|deflate}]
+   or: mp layout <name> [-exact | -workdir] <partition> [<partition> ...]
+   or: mp layout <name> -hosts <hostname> [<hostname> ...]
+   or: mp metadata <name> [-file] <filename> [-family <mdfamily>]
+   or: mp metadata <name> -string <string> [-family <mdfamily>]
+   or: mp straight-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp fan-in-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp fan-out-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp all-to-all-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp fan-into-ply0-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp fan-outof-ply0-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp adaptive-flow <name> <from-port> <to-port> [-metadata <mdname>] [-mode <file-modes>] [-breakable] [-encrypted] [-compressed] [-flush] [-stages <n>] [-buffer]
+   or: mp add-port <component>.<portname>[.<subportname>] [<option> ...]
+   or: mp port <macroname>.<portname>[.<subportname>] <port>
+   or: mp begin-macro <name>
+   or: mp end-macro <name>
+   or: mp phase <name>
+   or: mp checkpoint <name>
+   or: mp include <filename>
+   or: mp port <component>.<portname>[.<subportname>] [<option> ...]
+   or: mp port <macroname>.<portname>[.<subportname>] <port>
+   or: mp error <name> <error-string> [<error-string> ...]
+   or: mp range-partition <name> <collate> [-stages <n>] -layout <layout>
+   or: mp roundrobin-partition <name> <blocksize> [-stages <n>] -layout <layout>
+   or: mp hash-partition <name> <collate> [-stages <n>] -layout <layout>
+   or: mp function-partition <name> <function> [-stages <n>] [-package <package>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp load-level-partition <name> -layout <layout>
+   or: mp broadcast [-compression <compression level>] [-decompress] -layout <layout>
+   or: mp write-lookup -key <key> [-block_size <desired uncompressed data bytes per indexed block>] [-bitmap_size <log(2) of bitmap size>] [-miss_rate <0 to 4>] [-skip_empty] [-package <transform>] [+<flag> ...] -layout <layout>
+   or: mp gather <name> -layout <layout>
+   or: mp concat <name> -layout <layout>
+   or: mp interleave <name> <blocksize> -layout <layout>
+   or: mp copy [-throttle <flow rate description>] -layout <layout>
+   or: mp buffered-copy [-throttle <flow rate description>] [-buffer-bytes <nbytes>] [-buffer-records <nrecords>] -layout <layout>
+   or: mp local-sort <name> <collate> [-auto-max-core] [-max-core <nbytes>] -layout <layout>
+   or: mp local-merge <name> <collate> -layout <layout>
+   or: mp adaptive-sampleL <name> <ndesired> -layout <layout>
+   or: mp adaptive-sampleG <name> <ndesired> -layout <layout>
+   or: mp find-splitters <name> <collate> <npartitions> -layout <layout>
+   or: mp random <name> <nrecords> <recordlength> -layout <layout>
+   or: mp check-order <name> <collate> <limit> -layout <layout>
+   or: mp compute-checksum <name> -layout <layout>
+   or: mp compare-checksums <name> -layout <layout>
+   or: mp compare-flows <name> <limit> -layout <layout>
+   or: mp dump <name> -layout <layout>
+   or: mp reformat-transform <name> [-limit <limit>] [-ramp <ramp>] [-select <select>] [-output-index <transform>] [-output-indexes <transform>] [-log <logevents>] -layout <layout>
+   or: mp multi-reformat-transform <name> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp merge-transform <name> <key> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp fuse-transform <name> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp merge-join <name> <key> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout> [-max-core <memory_limit>] [-check-sort] [-sql-null-comparisons]
+   or: mp hash-join <name> <key> <xfr> [-auto-max-core] [-max-core <nbytes>] [-driving <input_index>] [-maintain-order] [-sql-null-comparisons] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp aggregate-transform <name> <key> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp select-transform <name> <select> [-package <package>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp logger <name> <file> <starttext> <endtext> -layout <layout>
+   or: mp filter <name> <command> [<option> ...] -layout <layout>
+   or: mp custom <name> <template> [<option> ...] -layout <layout>
+   or: mp multi <arg> ... -layout <layout>
+   or: mp db-continuous-select-multi <name> db_config_file interval delay as_of -layout <layout> 
+   or: mp db-continuous-update-multi <name> db_config_file commit_table -layout <layout> 
+   or: mp db-multi-update <name> db_config_file -commitTable <commit-table> [ -jobid <jobid> ] -batchSize <batch-size> ( -primarySqlN <sql1> [ -secondarySqlN <sql2> ] [ -filterN <expr>] [ -transformN <package> ]) ... [-continuous] [-no_actions_ok] [-ignoreDuplicates (compat | False | True)] -layout <layout> 
+   or: mp db-multi-update-continuous <name> db_config_file -commitTable <commit-table> [ -jobid <jobid> ] -batchSize <batch-size> ( -primarySqlN <sql1> [ -secondarySqlN <sql2> ] [ -filterN <expr>] [ -transformN <package> ]) ... [-continuous] [-no_actions_ok] [-ignoreDuplicates (compat | False | True)] -layout <layout> 
+   or: mp db-ims-lookup-segments <name> db_config_file target_segment [-batch_mode <DLI|BMP>] [-interface <local|remote>] [-match_required] -maximum_matches <max> [-generate_unique_key] [-ims_parameters <ims_parameters>] [-alternate_psbname <alternate_psbname>]
+   or: mp db-call-stored-procedure <name> db_config_file select_sql [<switches>]
+   or: mp sas-run-program <name> <sas_file> -layout <layout>
+   or: mp proctrans <xfr> ... -layout <layout>
+   or: mp aes_decrypt ...
+   or: mp aes_encrypt ...
+   or: mp Analyze_Graph analyze_graph <options...>
+   or: mp ASN.1_Decoder <name> [options...] -layout <layout>
+   or: mp ASN.1_Encoder <name> [options...] -layout <layout>
+   or: mp ASN.1_Splitter <name> [options...] -layout <layout>
+   or: mp assign-new-keys <name> <natural_key> <surrogate_key> [-override_surrogate_key <key spec>] [-max_core <nbytes>] [-maintain_order] -layout <layout>
+   or: mp Azure_Blob_Storage_Create_Container <name> ...
+   or: mp Azure_Blob_Storage_Delete_Blob <name> ...
+   or: mp Azure_Blob_Storage_Delete_Container <name> ...
+   or: mp Azure_Blob_Storage_List_Blobs <name> ...
+   or: mp Azure_Blob_Storage_List_Containers <name> ...
+   or: mp batch-subscribe <name>
+       [-infile <local_URL>] [-id <subscriber-id>] 
+       [-more (files_after | none)]
+       [-while <dml_expression>]
+       [-wait] [-nodelete]
+       [-package <package>]
+       -layout <layout> [-log <logmask>] [-limit <limit>] [-ramp <ramp>]
+   or: mp Batch_Cluster_Subscribe Batch_Cluster_Subscribe <options...>
+   or: mp Batch_Google_PubSub_Subscribe <name> ...
+   or: mp Batch_JMS_Publish <args>
+   or: mp Batch_JMS_Subscribe <args>
+   or: mp Batch_Kafka_Subscribe <name> ...
+   or: mp Batch_Kafka_Subscribe2 <name> ...
+   or: mp Batch_Kinesis_Subscribe <name> ...
+   or: mp Batch_MQ_Subscribe <args>
+   or: mp Batch_Pulsar_Subscribe <name> ...
+   or: mp Batch_RabbitMQ_Subscribe <name> ...
+   or: mp Batch_S3_Subscribe <name> ...
+   or: mp Batch_SQS_Subscribe <name> ...
+   or: mp begin-fold <name>
+   or: mp begin-transaction <name> <command-line>
+   or: mp BusinessObjects_41_UnxUnload BusinessObjects_41_UnxUnload <options...>
+   or: mp call-web-service internet-connector <options...>
+   or: mp Call_Ab_RPC call-ab-rpc <options...>
+   or: mp Call_Ab_RPC_Transaction Call_Ab_RPC_Transactions <options...>
+   or: mp Call_Active_Data Call_Active_Data <options...>
+   or: mp Call_Cluster Call_Cluster <options...>
+   or: mp Call_MQSeries_Service Call_MQSeries_Service <options...>
+   or: mp Call_MQSeries_Service_Transaction Call_MQSeries_Service_Transaction <options...>
+   or: mp Call_TCP call-tcp <package-name>
+        [-reject-threshold <choice>] [-ramp <ramp>] [-limit <limit>]
+        [-concurrency-mode <choice>]
+        [-concurrent_requests-allowed]
+        [-concurrent-requests-max-number <nn>]
+        [-concurrent-requests-maintain-record-order]
+        [-save-output-frequency <nn>]
+        [-logging] [-log_input <choice>] [-log_output <choice>] [-log_reject<choice>]
+        [-hostname <string>] [-port <nn>] [-timeout <nn>] [-always-reconnect]
+        [-ssl] [-ssl_cert_file <file>]
+        [-ssl_key_file <file>] [-ssl_key_type <PEM|ASN1>]
+        [-ssl_key_password <xxx>] [-ssl_key_password_encrypted <xxx>]
+        [-ssl_cacert_file <file>] [-ssl_cacert_path <dir>]
+        [-ssl_verify_cert] [-ssl_ciphers <list>]
+        [-ssl_random_file <file>] [-ssl_random_length <nn>]
+   or: mp canonicalize <name> <canon-xfr-fname> <vc-format-fname> -layout <layout>
+   or: mp CDC_Oracle_XStream <name> <db-config-file> <outbound-server-name>
+   or: mp combine <name> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp compress <name> -layout <layout>
+   or: mp compute-bc-lookups <transform> [-continuous] -key <collator> [-block_size <desired uncompressed data bytes per indexed block>] [-bitmap_size <log(2) of bitmap size>] [-overwrite] [-max-files <num>] [-max-core <num>] [-permissions <mode>] [-grouped] -layout <layout>
+   or: mp compute-closure <name> <number-of-partitions> <temporary-file-prefix> <key-length>
+   or: mp consolidate-bc-index data-url index-url key [-keep_bitmap]
+   or: mp continuous-call-web-service internet-connector <options...>
+   or: mp continuous-db-ter-fmload This component is internal and is not intended for direct use by end users.
+   or: mp continuous-ldap-join ldap-join <host> <port> <version> <base-dn> <anonymous> <user-dn> <password> <user-dn-is-relative> <object-class> <attr-filter> <multi-valued-attributes> <referral> <deref-aliases> <timeout> <size-limit>
+   or: mp continuous-rollup <name> <collator> <xfr> [-max-core <bytes>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp continuous-scan <name> <collator> <xfr> [-max-core <bytes>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp continuous-send-mail <name> <transform> -smtp-server-host <host> [-smtp-server-port <port>]
+   [-validate-addresses] [-on-address-error (Reject | Log | Ignore)]
+   [-debug-file-name <debug-file-name>]
+   [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout_name>
+   or: mp continuous-writefiles <transform> [-publish-style <overwrite | files_after>] [-max-files <num>] [-permissions <mode>] [-grouped] -layout <layout>
+   or: mp continuous_sequencer continuous_sequencer <name> -layout <layout>
+   or: mp copy-to-dataset <dataset name> { <fopen option> }+
+   or: mp copybomb <name> copybomb
+   or: mp Create_Data <name> <number-of-records> <xfr-file> [options] -layout <layout>
+   or: mp db-as400-load <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>] [-haostname <hostname>] [-rebuild_loader] [-ifs_data_path <path>] [-ifs_dml_path <path>] -layout <layout>
+   or: mp db-bigquery-load-gcs-util <name> <db-config-file> [options]
+   or: mp db-bigquery-load-storage-api-stream-writer <name> <db-config-file> [options]
+   or: mp db-bigquery-unload-gcs-util <name> <db-config-file> [options]
+   or: mp db-bigquery-unload-storage-api-controller <name> <db-config-file> [options]
+   or: mp db-bigquery-unload-storage-api-worker <name> <db-config-file> [options]
+   or: mp db-cassandra-load <name> <db-config-file> [options]
+   or: mp db-controller <name> <db-config-file> [-select <sql>] [-itable <name>] [-layout <layout>]
+   or: mp db-db2-genheader <name> <db-config-file> <tablename>
+   or: mp db-db2-ldr <name> <db-config-file> <tablename>
+   or: mp db-db2-pad <name> <db-config-file> <tablename>
+   or: mp db-db2-split <name> <db-config-file> <tablename> [[abcol1name=dbcol1name]..]
+   or: mp db-db2-xfrpad <name> <db-config-file> <tablename>
+   or: mp db-db2-xfrsplit <name> <db-config-file> <tablename> [[abcol1name=dbcol1name]..]
+   or: mp db-db2uss-load <name> <db-config-file> <jcl-tranform-file> <control-file> [-table_name <tablename>] [-unique_identifier <uid>] [-max_errors <num>] [-max_rejects <max>] -layout <layout>
+   or: mp db-db2uss-loader <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>] -layout <layout>
+   or: mp db-db2uss-unload <name> <db-config-file> <sql-select-clause> <ablocal-expression> [-itable <itable-name>] -layout <layout>
+   or: mp db-doc-store-lookup <name> <db-config-file> [options]
+   or: mp db-doc-store-unload <name> <db-config-file> [options]
+   or: mp db-doc-store-update-continuous <name> <db-config-file> [options]
+   or: mp db-doc-store-update <name> <db-config-file> [options]
+   or: mp db-dynamodb-read <name> <db-config-file> [options]
+   or: mp db-genutil-extract-np <XXX usage file to be written later>
+   or: mp db-genutil-extract <XXX usage file to be written later>
+   or: mp db-genutil-insert This component is internal and is not intended for direct use by end users.
+   or: mp db-hbase-bulkload <name> <db-config-file> [options]
+   or: mp db-hbase-load <name> <db-config-file> -table <tablename> ... -layout <layout>
+   or: mp db-hbase-lookup <name> <db-config-file> [options]
+   or: mp db-hbase-unload <name> <db-config-file> [options]
+   or: mp db-hbase-update-continuous <name> <db-config-file> [options]
+   or: mp db-hbase-update <name> <db-config-file> [options]
+   or: mp db-ims-lookup <name> <db-config-file> <segment_name> <package> -parent_segment_data <key_only | full_segment> -batch_mode <DLI | BMP> -ims_parameters <parameters> -match_required  -maximum_matches <num> -limit <num> -ramp <num> -layout <layout>
+   or: mp db-ims-unload <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>] [-mode <insert|append|replace>] [-direct=true] [-directfile=false] [-directparallel=true] [-num-discards-allowed <num>] [-num-errors-allowed <num>] [-commitnum <num>] [-bindsize <num>] -layout <layout>
+   or: mp db-inf-insert This component is internal and is not intended for direct use by end users.
+   or: mp db-inf-phlp This component is internal and is not intended for direct use by end users.
+   or: mp db-inf-var2delim This component is internal and is not intended for direct use by end users.
+   or: mp db-inf-xtract This component is internal and is not intended for direct use by end users.
+   or: mp db-key-value-store-lookup <name> <db-config-file> [options]
+   or: mp db-key-value-store-update-continuous <name> <db-config-file> [options]
+   or: mp db-key-value-store-update <name> <db-config-file> [options]
+   or: mp db-kudu-update-continuous <name> <db-config-file> [options]
+   or: mp db-kudu-update <name> <db-config-file> [options]
+   or: mp db-load-continuous <name> <db-config-file> <update-statement-file> <insert-statement-file> [-commitnum <commit-block-size>] -layout <layout>
+   or: mp db-load <name> <db-config-file> [-table <tablename> | -insert <sql>] ... -layout <layout>
+   or: mp db-lookup <db-config-file> <esql-lookup-file> <transform-file> <execute-when-not-found-file> [-match_optional] -maximum_matches <n> -commit_number <n> [-limit <n>] [-ramp <n>] [-log <log-string>]
+   or: mp db-mongo-lookup <name> <db-config-file> [options]
+   or: mp db-mongo-trunc <name> <db-config-file> -database <db> -collection <collection>
+   or: mp db-mongo-unload <name> <db-config-file> [options]
+   or: mp db-mongo-update-continuous <name> <db-config-file> [-options]
+   or: mp db-mongo-update <name> <db-config-file> [options]
+   or: mp db-mssql-ldr <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>]  -layout <layout>
+   or: mp db-netezza-load <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>]  -layout <layout>
+   or: mp db-netezza-unload <name> <db-config-file> <sql-select-clause> <ablocal-expression> [-itable <itable-name>]  [-max-rows-per-partition <num>] -layout <layout>
+   or: mp db-nza-extload <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>]  -layout <layout>
+   or: mp db-ora-sqlldr <name> <db-config-file> <tablename> <control-file> [-otable <name> -controller-node <node>] [-mode <insert|append|replace>] [-direct=true] [-directfile=false] [-directparallel=true] [-num-discards-allowed <num>] [-num-errors-allowed <num>] [-commitnum <num>] [-bindsize <num>] -layout <layout>
+   or: mp db-redbrick-unload <name> <db-config-file> <sql-select-clause> <ablocal-expression> [-itable <itable-name>]  [-max-rows-per-partition <num>] -layout <layout>
+   or: mp db-runsql-continuous <name> <db-config-file> <sql-file> [-maximum_errors <num>] [-interface api] [-ignore_drop_table_errors] -layout <layout>
+   or: mp db-runsql <name> <db-config-file> <sql-file> [-maximum_errors <num>] [-interface api] [-ignore_drop_table_errors] -layout <layout>
+   or: mp db-sybase-bcp-ldr <name> <db-config-file> <tablename> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>]  -layout <layout>
+   or: mp db-sybaseiq-dbisql-load <name> <db-config-file> <tablename> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>]  -layout <layout>
+   or: mp db-sybaseiq-load <name> <db-config-file> <tablename> [-otable <name> -controller-node <node>]  [-num_errors <num>] [-rows_per_commit <num>]  -layout <layout>
+   or: mp db-sybaseiq-unload <name> <db-config-file> <sql-select-clause> <ablocal-expression> [-itable <name> -controller-node <node>] -layout <layout>
+   or: mp db-ter-direct-load This component is internal and is not intended for direct use by end users.
+   or: mp db-ter-direct-unload <XXX usage file to be written later>
+   or: mp db-ter-fexp <XXX usage file to be written later>
+   or: mp db-ter-fmload This component is internal and is not intended for direct use by end users.
+   or: mp db-truncate <name> <db-config-file> <sql-file> -layout <layout>
+   or: mp db-unload <name> <db-config-file> <sql-select-clause> <ablocal-expression> [-itable <itable-name>]  [-max-rows-per-partition <num>] -layout <layout>
+   or: mp db-update-continuous <name> <db-config-file> <update-statement-file> <insert-statement-file> [-commitnum <commit-block-size>] -layout <layout>
+   or: mp db-update <name> <db-config-file> <update-statement-file> <insert-statement-file> [-commitnum <commit-block-size>] -layout <layout>
+   or: mp dbi-udl-01-controller This component is internal and is not intended for direct use by end users.
+   or: mp dbi-udl-01-datareader-via-file This component is internal and is not intended for direct use by end users.
+   or: mp dbi-udl-01-datareader-via-npipe This component is internal and is not intended for direct use by end users.
+   or: mp dblibunisub <args>
+   or: mp dblibunisub2 <args>
+   or: mp decrypt <name> <key>
+   or: mp dedup <name> <key> [-package <package>] [-select <select-expr>] [-keep (first | last | unique-only)] 
+   [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp Delete_Multiple_Files -delete <transform> [-ignore_missing] -layout <layout>
+   or: mp delfile <name> <file> -layout <layout>
+   or: mp denormalize-transform <name> <collator> <xfr-file> <prefix> <limit> <ramp> <log-events> -layout <layout>
+                   [DEPRECATED: Use denormalize instead.]
+   or: mp denormalize <name> <collator> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp DF_Join <name> [options...] -layout <layout>
+   or: mp DF_Read_Parquet <name> [options...] -layout <layout>
+   or: mp DF_Rollup <name> [options...] -layout <layout>
+   or: mp DF_Sort <name> [options...] -layout <layout>
+   or: mp DF_Transpose <name> [options...] -layout <layout>
+   or: mp DML_Cross_Reference DML_Cross_Reference <options...>
+   or: mp Do_All_in_Collection Do_All_in_Collection <options...>
+   or: mp dp-exec <name> <xfr-file> -layout <layout>
+   or: mp Dynamic_Filter_by_Expression <name> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp encrypt <name> <key>
+   or: mp end-transaction <name> <command-line>
+   or: mp exact-sample 
+   or: mp Extract_ASN.1_Message <name> <package> [options...] -layout <layout>
+   or: mp Extract_JSON_Message <name> <package> [options...] -layout <layout>
+   or: mp file-recirculate 
+   or: mp format-for-dump <name> normal| hex-fields | hex-record <domversion> [ -print-metadata ] [ -print-functions ] [ -print-internals ] [ -progress <secs> ] [ -select <expression> ] [ -start <recordnum> ] [ -records <recordnums> ] [ -attribute <name>=<value> ] [ -protocol <version> ] [ -as-xml ] [ -select-is-encoded ]  [ -mark-invalid ] [ -easy-sort ] -layout <layout>
+   or: mp Free_Shared_Variables <name> <package> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp from-tiled <cmdline>
+   or: mp ftp-from <name> -rfile <remote-file> -rhost <remote-host> [-ascii | -binary] [-user <remote username>] [-pw <remote password>] [-acct <remote account password>] [-site <string>] -layout <layout>
+   or: mp ftp-multiple-from <name> <transform> -skip-count <count> -read-count <count> -layout <layout> -file-empty <Fail|Notify|Ignore|Accept> -file-unavailable <Fail|Notify|Ignore> -filename-error <Fail|Notify|Ignore> -read_as_single_record -rhost <remote-host> [-ascii | -binary] [-user <remote username>] [-pw <remote password>] [-acct <remote account password>] [-site <string>] -layout <layout>
+   or: mp ftp-multiple-to <transform> -layout <layout> [-write_raw_data] [-session-per-blip] [-session-per-transfer] [-grouped] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -rhost <remote-host> [-ascii | -binary] [-user <remote username>] [-pw <remote password>] [-acct <remote account password>] [-site <string>]
+   or: mp ftp-to <name> -rfile <remote-file> -rhost <remote-host> [-ascii | -binary] [-user <remote username>] [-pw <remote password>] [-acct <remote account password>] [-appremote] [-site <string>] -layout <layout>
+   or: mp gather-transactions-from-pool <name> -layout <layout>
+   or: mp gather-transactions <name> -layout <layout>
+   or: mp generate-with-transform <name> <num_records> { [-expression <field> <expr>]
+                                          [-sequential <field> <minimum>]
+                                          [-minimum <field> <minimum>]
+                                          [-maximum <field> <maximum>]
+                                          [-default <field>] }*
+                                          [-dynamic <type description>]
+                                          [-seed <rng seed string>]
+                                          [-transform <transform name>]
+                   -layout <layout>
+   or: mp generate <name> <num_records> { [-expression <field> <expr>]
+                                          [-sequential <field> <minimum>]
+                                          [-minimum <field> <minimum>]
+                                          [-maximum <field> <maximum>]
+                                          [-default <field>] }*
+                                          [-seed <rng seed string>]
+                   -layout <layout>
+   or: mp Google_Cloud_Storage_Create_Bucket <name> ...
+   or: mp Google_Cloud_Storage_Delete_Bucket <name> ...
+   or: mp Google_Cloud_Storage_Delete_Objects <name> ...
+   or: mp Google_Cloud_Storage_List_Buckets <name> ...
+   or: mp Google_Cloud_Storage_List_Objects <name> ...
+   or: mp Google_PubSub_Publish <name> ...
+   or: mp Google_PubSub_Subscribe <name> ...
+   or: mp gunzip <name> -layout <layout>
+   or: mp gzip <name> -layout <layout>
+   or: mp Handle_Errors <name> [-package package] [options] -layout <layout>
+   or: mp Handle_Logs <name> [options] -layout <layout>
+   or: mp hash-aggregate <name> <collator> <xfr> [-auto-max-core] [-max-core <bytes>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp hash-dedup <name> <key> [-select <select-expr>] [-package <package>] [-max-core <bytes>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp hash-denormalize <name> <collator> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] [-layout <layout>]
+   or: mp hash-rollup <name> <collator> <xfr> [-auto-max-core] [-max-core <bytes>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp hash-scan <name> <collator> <xfr> [-auto-max-core] [-max-core <bytes>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp HTTP_Publish <name> ...
+   or: mp HTTP_Subscribe <name> ...
+   or: mp inflate <name> -layout <layout>
+   or: mp JMS_Publish <args>
+   or: mp join-with-bc-lookup join-with-bc-lookup <options...>
+   or: mp Kafka_Publish <name> ...
+   or: mp Kafka_Publish2 <name> ...
+   or: mp Kafka_Subscribe <name> ...
+   or: mp Kafka_Subscribe2 <name> ...
+   or: mp Kinesis_Publish <name> ...
+   or: mp Kinesis_Subscribe <name> ...
+   or: mp ldap-join ldap-join <host> <port> <version> <base-dn> <anonymous> <user-dn> <password> <user-dn-is-relative> <object-class> <attr-filter> <multi-valued-attributes> <referral> <deref-aliases> <timeout> <size-limit>
+   or: mp ldap-publisher ldap-publisher <host> <port> <version> <base-dn> <anonymous> <user-dn> <password> <user-dn-is-relative> <object-class> <multi-valued-attributes> <referral> <deref-aliases> <timeout> <size-limit>
+   or: mp ldap-reader ldap-reader <host> <port> <version> <base-dn> <anonymous> <user-dn> <password> <user-dn-is-relative> <object-class> <attr-filter> <multi-valued-attributes> <referral> <deref-aliases> <timeout> <size-limit>
+   or: mp ldap-writer ldap-writer <host> <port> <version> <base-dn> <anonymous> <user-dn> <password> <user-dn-is-relative> <object-class> <multi-valued-attributes> <referral> <deref-aliases> <timeout> <size-limit>
+   or: mp leading-records <name> <max-records> -layout <layout>
+   or: mp List_Files <transform> -mode
+<files|files-and-directories|directories|hdfs-blocks> [-singledir <Summary|Expansion>] [-file-pattern <glob pattern>] [-directory-prune <glob pattern>] [-skip-count <count>] [-read-count <count>] -layout <layout> [-file-empty <Fail|Notify|Ignore|Accept>] [-file-unavailable <Fail|Notify|Ignore>] [-filename-error <Fail|Notify|Ignore>] [-input-error <Fail|Notify|Ignore>]
+   or: mp Load_Collection Load_Collection <options...>
+   or: mp Manage_Iceberg_Table <name> [options...] -layout <layout>
+   or: mp merge-bc-data data-url [data-url ...] index-url [index-url ...] key [-extra-data <abort|ignore|process>]
+   or: mp merge-multi-bc-data <transform package> key [-input-error <abort|ignore|notify>] [-extra-data <abort|ignore|process>] [-limit <limit>] [-ramp <ramp>] [-log <logmask>]
+   or: mp merge-runs <name> <collator> -layout <layout>
+   or: mp meta_pivot <name> <name_field> <value_field> [<pivot_field>[-><pivot_out_field>]]+ -layout <layout>
+   or: mp MQ_Publish <args>
+   or: mp MQ_Subscribe <args>
+   or: mp MQTT_Publish <args>
+   or: mp MQTT_Subscribe <args>
+   or: mp Multicast Multicast
+        [-multicast_IP_address <ip_addr>]
+        [-port <port>]
+        [-max_memory <max_mem_size_in_MB>]
+        [-udp_block_size <udp_block_size_in_bytes>]
+        [-max_send_speed <blocks_per_sec>]
+        [-max_send_speed_check_period <block_count>]
+        [-resend_period <period_in_microseconds>]
+        [-acknowledgement_period <period_in_microseconds>]
+        [-acknowledgement_group_size <block_count>]
+        [-report_file <URL>]
+        [-report_period <period_in_seconds>]
+   or: mp multipublish <name> <queue directory> -layout <layout> [-create-empty] [-log <logevents>] [-compressed] [-varstring] [-permissions <mode>] [-package <package>]
+   or: mp mvsdasd mvsdasd <options>
+   or: mp normalize-transform <name> <xfr-file> <prefix> <limit> <ramp> <log-events> -layout <layout>
+                   [DEPRECATED: Use normalize instead.]
+   or: mp normalize <name> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp over-sample 
+   or: mp partial-sort <name> <collator> [-max-core <nbytes] -layout <layout>
+   or: mp partition-transactions-by-expression <name> <function> -layout <layout>
+   or: mp partition-transactions-to-pool <name> -layout <layout>
+   or: mp pbe-via-tiled <cmdline>
+   or: mp pbk-via-tiled <cmdline>
+   or: mp pbrr-via-tiled <cmdline>
+   or: mp percentage-partition 
+   or: mp percentage-sample <percentage>
+   or: mp publish <name> <Queue URL> [-publish_style (appended | file_after | queue)] [-delete_file_if_exists] [-create_empty (True | False)] [-package <package>] -layout <layout> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] [-permissions <mode>]
+   or: mp publish_recycle <name> <Recycle_Queue_URL> -layout <layout>
+   or: mp Pulsar_Publish <name> ...
+   or: mp Pulsar_Subscribe <name> ...
+   or: mp RabbitMQ_Publish <name> ...
+   or: mp RabbitMQ_Subscribe <name> ...
+   or: mp Rank_N_Records <name> <package> <num_records> [options...] -layout <layout>
+   or: mp read-bc-data data-url [data-url ...] index-url [index-url ...] key [-extra-data <abort|ignore|process>]
+   or: mp read-multi-bc-data <transform package> key [-input-error <abort|ignore|notify>] [-extra-data <abort|ignore|process>] [-limit <limit>] [-ramp <ramp>] [-log <logmask>]
+   or: mp read-shared [-startup-seconds <startup seconds>] [-startup-attempts <connection tries>] [-startup-retry-seconds <retry delay>] [-max-clients <clients per server>] [-n-buffers <n-buffers>] [-buffer-kbytes <buffer-kbytes>] [-file-mode <filemode>] [-progress-timeout-seconds <timeout-seconds>] [-io-method direct | conventional] [-group <alphanumeric group name>]
+   or: mp read-sv <name> <xfr> -layout <layout>
+   or: mp read-tagged-values-package <name> <package> [options...] -layout <layout>
+   or: mp read-tagged-values <name> [options...] -layout <layout>
+   or: mp read-xml-xfr read-xml-xfr <options...>
+   or: mp read-xml <name> [ -parser { expat | xerces } ]
+       [ -ignore-blank-cdata ]
+       [ -custom-format ]
+       [ -root-element <name> ]
+       [ -base-element <name> ]
+       [ -leaf-element <name> ]
+       [ -character-data-field <name> ]
+       -layout <layout>
+   or: mp Read_ASN.1_Transform <name> <package> [options...] -layout <layout>
+   or: mp Read_Avro <name> [options...] -layout <layout>
+   or: mp Read_Excel Read_Excel <options...>
+   or: mp Read_Excel_Flow Read_Excel_Flow <options...>
+   or: mp Read_JSON <name> [options...] -layout <layout>
+   or: mp Read_Nested <name> [options...] -layout <layout>
+   or: mp Read_Nested_Sequence <name> [options...] -layout <layout>
+   or: mp Read_Parquet <name> [options...] -layout <layout>
+   or: mp readfiles <transform> [-compressed] [-skip-count <count>] [-read-count <count>] -layout <layout> [-file-empty <Fail|Notify|Ignore|Accept>] [-file-missing <Fail|Notify|Ignore>] [-file-unavailable <Fail|Notify|Ignore>] [-filename-error <Fail|Notify|Ignore>] [-input-error <Fail|Notify|Ignore>] [-read_as_single_record] [-read-blocks] [-maximum-block-bytes <max>]
+   or: mp recirculate <name> <number-of-partitions> <temporary-file-prefix> <key-field-1> <key-field-2>
+   or: mp reformat-3270 <name> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp reformat-s3270 <name> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp Rename_Multiple_Files -rename <transform> -layout <layout>
+   or: mp repair-input <name> <package> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp Replicate_Internal <name> -layout <layout>
+   or: mp revind This component is internal and is not intended for direct use by end users.
+   or: mp rollup-transform <name> <collator> <xfr-file> <prefix> <limit> <ramp> <log-events> -layout <layout>
+                   [DEPRECATED: Use rollup instead.]
+   or: mp rollup <name> <collator> <xfr> [-limit <limit>] [-ramp <ramp>] [-check-sort] [-log <logevents>] -layout <layout>
+   or: mp run-micrograph <name> ...
+   or: mp Run_DMLScript <name> ...
+   or: mp S3_Abort_Multipart_Upload <name> ...
+   or: mp S3_Copy_Object <name> ...
+   or: mp S3_Create_Bucket <name> ...
+   or: mp S3_Delete_Bucket <name> ...
+   or: mp S3_Delete_Bucket_Tags <name> ...
+   or: mp S3_Delete_Object_Tags <name> ...
+   or: mp S3_Delete_Objects <name> ...
+   or: mp S3_Delete_Version <name> ...
+   or: mp S3_Get_Bucket_ACL <name> ...
+   or: mp S3_Get_Bucket_Versioning <name> ...
+   or: mp S3_Get_Object_ACL <name> ...
+   or: mp S3_Get_Object_Metadata <name> ...
+   or: mp S3_List_Bucket_Tags <name> ...
+   or: mp S3_List_Buckets <name> ...
+   or: mp S3_List_Multipart_Uploads <name> ...
+   or: mp S3_List_Objects <name> ...
+   or: mp S3_List_Versions <name> ...
+   or: mp S3_Publish <name> ...
+   or: mp S3_Set_Bucket_Canned_ACL <name> ...
+   or: mp S3_Set_Bucket_Tags <name> ...
+   or: mp S3_Set_Bucket_Versioning <name> ...
+   or: mp S3_Set_Object_Canned_ACL <name> ...
+   or: mp S3_Set_Object_Tags <name> ...
+   or: mp S3_Subscribe <name> ...
+   or: mp sample-control 
+   or: mp sas-input-program sas-input-program <libname> <dataset> <outputFile> [-log <logfile>]
+   or: mp sas-metadata sas-metadata <libname> <dataset> [-nullable <true|false>] [-case <as_is|all_upper|all_lower>] [-prefer <first_defined|informat_first|format_first|informat_only|format_only>] [-endianness <true|false>] [-utf8_aware <true|false>]
+   or: mp sas-output-program sas-output-program <libname> <dataset> <inputFile> [-log <logfile>] [-key <keyspec>] [-composite_key <name>]
+   or: mp sas-upsert-program sas-upsert-program <libname> <dataset> <inputFile> -key <key> [-do_insert] [-update_count <update-count>] [-composite_key <key_name>] [-log <logfile>]
+   or: mp scan-transform <name> <collator> <xfr-file> <prefix> <limit> <ramp> <log-events> -layout <layout>
+                   [DEPRECATED: Use scan instead.]
+   or: mp scan <name> <collator> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp send-mail <name> <transform> -smtp-server-host <host> [-smtp-server-port <port>]
+   [-validate-addresses] [-on-address-error (Reject | Log | Ignore)]
+   [-debug-file-name <debug-file-name>] [-continuous]
+   [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout_name>
+   or: mp send-to-ui <name> [ -grab-input <bool> ] -layout <layout>
+   or: mp serial-file-partition <file list ...>
+   or: mp serial-hsf-partition <file list ...>
+   or: mp Set_File_Permissions -chmod <transform> -mode <file_permission> -layout <layout>
+   or: mp sftp-from <name> -sftp|-scp -host <remote hostname> -source-file <filename to copy> [-user <remote username>] [-passphrase <password or passphrase>] [-encrypted-passphrase <encrypted password or passphrase>] [-program <path to sftp program>] [-no-passphrase|-need-passphrase] [-extra-args <extra arguments to sftp>] [-tolerate-output|-dont-tolerate-output] [-sftp-script <path of template script>]
+   or: mp sftp-to <name> -sftp|-scp -host <remote hostname> -target-file <destination of copy> [-temp-target <temporary destination>] [-user <remote username>] [-passphrase <password or passphrase>] [-encrypted-passphrase <encrypted password or passphrase>] [-program <path to sftp program>] [-no-passphrase|-need-passphrase] [-extra-args <extra arguments to sftp>] [-tolerate-output|-dont-tolerate-output] [-sftp-script <path of template script>]
+   or: mp simple-parse <name> <xfr> -layout <layout>
+   or: mp Simulator_Publish <name> [-path <path>]
+   or: mp SMPP_Transmit call-tcp <package-name>
+        [-reject-threshold <choice>] [-ramp <ramp>] [-limit <limit>]
+        [-concurrency-mode <choice>]
+        [-concurrent_requests-allowed]
+        [-concurrent-requests-max-number <nn>]
+        [-concurrent-requests-maintain-record-order]
+        [-save-output-frequency <nn>]
+        [-asynchronous]
+        [-logging] [-log_input <choice>] [-log_output <choice>] [-log_reject<choice>]
+        [-hostname <string>] [-port <nn>] [-timeout <nn>] [-always-reconnect]
+        [-ssl] [-ssl_cert_file <file>]
+        [-ssl_key_file <file>] [-ssl_key_type <PEM|ASN1>]
+        [-ssl_key_password <xxx>] [-ssl_key_password_encrypted <xxx>]
+        [-ssl_cacert_file <file>] [-ssl_cacert_path <dir>]
+        [-ssl_verify_cert] [-ssl_ciphers <list>]
+        [-ssl_random_file <file>] [-ssl_random_length <nn>]
+        [-ssl_configuration_string <openssl_config_string>]
+   or: mp SMTP_Subscribe <args>
+   or: mp sort-groups <name> -major-key <key> -minor-key <key> [-auto-max-core] [-max-core <nbytes>] [-allow-unsorted] -layout <layout>
+   or: mp Sort_within_Window <name> <package> [options...]
+   or: mp split <name> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp SQL_Analysis sqlanalysis [-case {Upper | Lower | Mixed}]  [-control-dependencies {True|False}] [-dialect <dialect>] [-dialect2 <dialect>]
+   or: mp SQS_Publish <name> ...
+   or: mp SQS_Subscribe <name> ...
+   or: mp subscribe <name>
+       <URL> <package_file> [-id <subscriber-id>]
+       [-more (appended | files_after | rotating | none | files_in_directory | files_after_time)]
+       [-checkpoint-trigger (time_interval record_count infile_boundary dml_driven service)]
+       [-checkpoint_interval <n_records>]
+       [-wait] [-nodelete]
+       -layout <layout> [-log <logmask>] [-limit <limit>] [-ramp <ramp>]
+   or: mp subscribe_recycle <name> <Recycle_Queue_URL> -layout <layout>
+   or: mp Summarize_Lineage Summarize_Lineage <options...>
+   or: mp T3270 <name> <transform> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout_name>
+   or: mp tiled-connector-source <cmdline>
+   or: mp tiled-connector-target <cmdline>
+   or: mp tiled-hook <cmdline>
+   or: mp tiled-run <cmdline>
+   or: mp tiled-worker-publish <args>
+   or: mp tiled-worker-subscribe <args>
+   or: mp tiled-worker <cmdline>
+   or: mp to-tiled <cmdline>
+   or: mp To_PGWire 
+   or: mp Touch_Files -touch <transform> -layout <layout>
+   or: mp Transactional_Filter <name> -layout <layout>
+   or: mp Transform_Ruleset <name> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp UDP_Publish <name> [-hostname <host>] [-port <port>] [-varstring] [-package <file>]
+   or: mp UDP_Subscribe <name> ...
+   or: mp uncompress <name> -layout <layout>
+   or: mp uniadapter <name> <command-line>
+   or: mp unipublish <name> <command line> -layout <layout>
+   or: mp unisubscribe <name>
+       <package_file> 
+       [-wait_for_commit] [-poll_delay <delay in seconds>]
+       [-checkpoint-trigger (time_interval record_count dml_driven service)]
+       [-checkpoint_interval <n_records>]
+       -layout <layout> [-log <logmask>] [-limit <limit>] [-ramp <ramp>]
+   or: mp Unload_Analysis unload_analysis <options...>
+   or: mp Unload_Collection Unload_Collection <options...>
+   or: mp validate-xml-xfr validate-xml-xfr <options...>
+   or: mp validate <name> [-package <package>] [-limit <limit>] [-ramp <ramp>] [-log <logevents>]
+   or: mp vsamlookup <vsam url> <transform-file> [-match_optional] [-maximum_matches <n>]
+  [-limit <n>] [-ramp <n>] [-log <log-string>]
+  [-reverse] [-read_only]
+   or: mp write-bc-lookups <transform> [-continuous] -key <collator> [-block_size <desired uncompressed data bytes per indexed block>] [-bitmap_size <log(2) of bitmap size>] [-overwrite] [-max-files <num>] [-max-core <num>] [-permissions <mode>] [-grouped] -layout <layout>
+   or: mp write-iceberg-files <transform> [-compressed] [-overwrite] [-max-files <num>] [-max-core <num>] [-permissions <mode>] [-grouped] -layout <layout>
+   or: mp write-lookup-indexes <name> "-key <key> [-key <key> ...] -layout <layout>
+   or: mp write-xml-xfr write-xml-xfr <options...>
+   or: mp write-xml <name> [ -custom-format ]
+       [ -root-element <name> ]
+       [ -base-element <name> ]
+       [ -leaf-element <name> ]
+       [ -character-data-field <name> ]
+       [ -add-bom ]
+       -layout <layout>
+   or: mp Write_ASN.1_Transform <name> <package> [options...] -layout <layout>
+   or: mp Write_Avro <name> [options...] -layout <layout>
+   or: mp Write_Excel Write_Excel <options...>
+   or: mp Write_Excel_Flow Write_Excel_Flow <options...>
+   or: mp Write_File_Datasets -sandbox <sandbox> [-lock] [-break-locks] [-validate] [-create-directories]
+   or: mp Write_JSON <name> [options...] -layout <layout>
+   or: mp Write_MSLI <name> ...
+   or: mp Write_Nested_Sequence <name> [options...] -layout <layout>
+   or: mp Write_Sandbox_Files -sandbox <sandbox> [-lock] [-break-locks] [-create-directories]
+   or: mp Write_Separated_Values <name> -layout <layout>
+   or: mp Write_Table_Datasets -sandbox <sandbox> [-lock] [-break-locks] [-validate] [-create-directories]
+   or: mp writefiles <transform> [-compressed] [-overwrite] [-max-files <num>] [-max-core <num>] [-permissions <mode>] [-grouped] -layout <layout>
+   or: mp writelookups <transform> [-continuous] -key <collator> [-overwrite] [-max-files <num>] [-max-core <num>] [-permissions <mode>] [-grouped] -layout <layout>
+   or: mp ws-security-decode <name> <package-file> [-verify-username-password] [-verify-timestamp] [-verify-client-certificate] [-verify-signatures]
+       [-public-key <path-to-key>] [-public-key-type {PEM, ASN1, Binary}]
+       [-cacert-file <cacert-file>] [-cacert-path <cacert-path>]
+       [-error_group <group>] [-log_group <group>]
+       [-limit <limit>] [-ramp <ramp>] [-log <logevents>]
+   or: mp ws-security-encode <name> <package-file> [-user-name <username>] [-password <password>] [-password-encrypted <password>]
+       [-password-auth-type {none, plaintext, digest, plaintext-with-expiration, digest-with-expiration}]
+       [-pretty-formatting {off, on}] [-password-digest-type {SHA-1, SHA-256}]
+       [-client-certificate <cert-path>] [-client-certificate-type {PEM, ASN1}]
+       [-sign-body] [-sign-usernametoken] [-sign-timestamp] [-sign certificate] [-sign-xpointer]
+       [-xpointer-expression <xpointer-expression>] [-private-key <key-path>]
+       [-private-key-password <password>] [-private-key-password-encrypted <password>]
+       [-private-key-type {PEM, ASN1, Binary}] [-signature-algorithm {RSA_SHA1, HMAC-SHA1}]
+       [-error_group <group>] [-log_group <group>]
+       [-limit <limit>] [-ramp <ramp>] [-log <logevents>]
+   or: mp xml-combine <name> [ -pretty-formatting on|off ]
+       [ -indent-size <num> ]
+       [ -document-header on|off ]
+       [ -add-bom ]
+       [ -document-per-record ]
+       [ -xml-doc-field-name <field-name> ]
+       [ -limit <limit> ]
+       [ -ramp <ramp> ]
+       [ -log <log_event_mask> ]
+       [ -package <package> ]
+       [ -i <port-name> ]
+       [ -port <port-name> ]
+       -layout <layout>
+   or: mp xml-reformat <name> <xfr> [-limit <limit>] [-ramp <ramp>] [-log <logevents>] -layout <layout>
+   or: mp xml-split <name> [ -parser { expat | xerces } ]
+       [ -o <port-name> ]
+       [ -xml-doc-field-name <name> ]
+       [ -missing-fields { ignore | error } ]
+       [ -limit <limit> ]
+       [ -ramp <ramp> ]
+       [ -log <log_event_mask> ]
+       [ -package <package> ]
+       -layout <layout>
+   or: mp XML_To_JSON <name> [options...] -layout <layout>
+   or: mp db-ter-unload-data <name> <db-config-file> -select <sql-select-statement> [-layout <layout>]
+   or: mp sas-upsert <name> <dataset> [-update_count <count>] [-layout <layout>]
+   or: mp itable-ims <name> <db-config-file> <table> [-layout <layout>]
+   or: mp otable <name> <db-config-file> -table <tablename> [-layout <layout>]
+   or: mp db-inf-load-data This component is internal and is not intended for direct use by end users.
+   or: mp db-ter-delete-data <name> <db-config-file> -delete <delete stmt> [-brief] [-layout <layout>]
+   or: mp db-ter-update-data <name> <db-config-file>
+   or: mp db-ter-fast-export <name> <db-config-file> -select <sql-select-statement> [-layout <layout>]
+   or: mp itable-mongo <name> <db-config-file> <table> [-layout <layout>]
+   or: mp sas-run-v2 sas-run-v2 <inputs> <outputs> <sasfilename> [-full_url <url>] [-limit <limit>] [-ramp <ramp>] [-memport <port> <dml_file> <dml_name>]
+   or: mp db-ter-load-data <name> <db-config-file> -select <sql-select-statement> [-layout <layout>]
+   or: mp sas-idataset-v2 sas-idataset-v2 <libname> <dataset> <output_file> [-log <logfile>]
+   or: mp sas-odataset-v2 sas-odataset-v2 <libname> <dataset> <inputfile> [-log <logfile>]
+   or: mp itable <name> <db-config-file> -select <sql-select-statement> [-layout <layout>]
+   or: mp db-inf-unload-data <name> <db-config-file> -select <sql-select-statement> [-layout <layout>]
+
