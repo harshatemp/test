@@ -1,3 +1,95 @@
+# MP Help Skill v2
+
+## Index
+
+1. Overview
+2. Purpose
+3. Architecture
+4. Core Concepts
+5. Command Inventory
+   5.1 Graph Commands
+   5.2 Component Commands
+   5.3 Parameter Commands
+   5.4 Relation Commands
+   5.5 Utility Commands
+
+6. Entity Definitions
+   6.1 Repository (XXGrepository)
+   6.2 Graph (XXGgraph)
+   6.3 Component (XXGpvertex)
+   6.4 Parameters (XXparameter)
+   6.5 Parameter Sets (XXparameter_set)
+   6.6 Relations
+
+7. Parsing Framework
+   7.1 Tokenization
+   7.2 Group Extraction
+   7.3 Block Detection
+   7.4 Nested Structure Handling
+   7.5 Escaped Character Processing
+
+8. Component Extraction
+   8.1 Component Metadata
+   8.2 Ports
+   8.3 Attributes
+   8.4 Parameter Sets
+   8.5 DML Handling
+
+9. Parameter Processing
+   9.1 Parameter Extraction Logic
+   9.2 Parameter Data Model
+   9.3 Nested Parameters
+   9.4 Parameter Resolution
+   9.5 Environment Variable Resolution
+
+10. Flow Extraction
+    10.1 Input Links
+    10.2 Output Links
+    10.3 Relation Mapping
+    10.4 Component Connections
+
+11. Repository Parsing
+    11.1 Repository Metadata
+    11.2 Graph Metadata
+    11.3 Entity Relationships
+
+12. Data Structures
+    12.1 Component Dictionary
+    12.2 Parameter Dictionary
+    12.3 Flow Dictionary
+    12.4 JSON Schema
+
+13. PySpark Generation
+    13.1 Component Mapping
+    13.2 Transformation Generation
+    13.3 Flow Translation
+    13.4 Runtime Parameters
+
+14. APIs and Functions
+    14.1 extract_blocks()
+    14.2 tokenize()
+    14.3 parse_component()
+    14.4 parse_parameter_set()
+    14.5 parse_parameter()
+    14.6 build_tree()
+    14.7 extract_flow()
+
+15. Examples
+    15.1 Simple Graph
+    15.2 Complex Graph
+    15.3 Nested Parameters
+    15.4 End-to-End Conversion
+
+16. Error Handling
+
+17. Best Practices
+
+18. Known Limitations
+
+19. Troubleshooting
+
+20. Version History
+
 ---
 name: abinitio-mp-help
 description: Reference for interpreting Ab Initio `mp` commands (mp job, layout, metadata, file, flows, components, phase, checkpoint, run) as they appear in wrapper scripts and deployed graph scripts. Use whenever input contains `mp <command>` lines or asks what an mp command, argument or option means.
