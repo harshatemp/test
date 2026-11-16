@@ -6,79 +6,75 @@ source: mp help (Ab Initio Co>Operating System `mp` usage text — 438 commands,
 consumer: LLM
 scope: Interpretation of mp commands only. No target-language code.
 ---
-## Index
-1. Overview
-2. Purpose
-3. Architecture
-4. Core Concepts
-5. Command Inventory
-   5.1 Graph Commands
-   5.2 Component Commands
-   5.3 Parameter Commands
-   5.4 Relation Commands
-   5.5 Utility Commands
-6. Entity Definitions
-   6.1 Repository (XXGrepository)
-   6.2 Graph (XXGgraph)
-   6.3 Component (XXGpvertex)
-   6.4 Parameters (XXparameter)
-   6.5 Parameter Sets (XXparameter_set)
-   6.6 Relations
-7. Parsing Framework
-   7.1 Tokenization
-   7.2 Group Extraction
-   7.3 Block Detection
-   7.4 Nested Structure Handling
-   7.5 Escaped Character Processing
-8. Component Extraction
-   8.1 Component Metadata
-   8.2 Ports
-   8.3 Attributes
-   8.4 Parameter Sets
-   8.5 DML Handling
-9. Parameter Processing
-   9.1 Parameter Extraction Logic
-   9.2 Parameter Data Model
-   9.3 Nested Parameters
-   9.4 Parameter Resolution
-   9.5 Environment Variable Resolution
-10. Flow Extraction
-    10.1 Input Links
-    10.2 Output Links
-    10.3 Relation Mapping
-    10.4 Component Connections
-11. Repository Parsing
-    11.1 Repository Metadata
-    11.2 Graph Metadata
-    11.3 Entity Relationships
-12. Data Structures
-    12.1 Component Dictionary
-    12.2 Parameter Dictionary
-    12.3 Flow Dictionary
-    12.4 JSON Schema
-13. PySpark Generation
-    13.1 Component Mapping
-    13.2 Transformation Generation
-    13.3 Flow Translation
-    13.4 Runtime Parameters
-14. APIs and Functions
-    14.1 extract_blocks()
-    14.2 tokenize()
-    14.3 parse_component()
-    14.4 parse_parameter_set()
-    14.5 parse_parameter()
-    14.6 build_tree()
-    14.7 extract_flow()
-15. Examples
-    15.1 Simple Graph
-    15.2 Complex Graph
-    15.3 Nested Parameters
-    15.4 End-to-End Conversion
-16. Error Handling
-17. Best Practices
-18. Known Limitations
-19. Troubleshooting
-20. Version History
+## INDEX
+0. GOLDEN RULES
+1. PURPOSE & SCOPE
+2. EXECUTION MODEL
+   2.1 Graph Execution Flow
+3. OBJECT MODEL
+   3.1 Core Objects
+   3.2 Ports
+4. PARSING RULES
+   4.1 Positional Argument Types
+5. PHASE, CHECKPOINT & ORDERING
+6. REJECT, ERROR & DESELECT HANDLING
+7. CLASSIFICATION
+8. PARAMETER DICTIONARY
+   8.1 Schema / Record Format
+   8.2 Keys, Ordering & Selection
+   8.3 Transforms & Expressions
+   8.4 Reject Thresholds & Error Policy
+   8.5 Datasets, Files & Formats
+   8.6 XML / Document Formatting
+   8.7 Database
+   8.8 Lookup Indexing
+   8.9 Runtime, Performance & Topology
+   8.10 Connectivity & Credentials
+9. COMMAND CATALOG
+   9.1 Job Administration & Execution
+   9.2 Definitions: Files, Layouts, Metadata, Includes, Errors
+   9.3 Ports, Macros, Folds
+   9.4 Execution Control
+   9.5 Flows
+   9.6 Partition Components
+   9.7 Departition & Copy
+   9.8 Sorting
+   9.9 Record Transformation
+   9.10 Joins
+   9.11 Aggregation & Running Calculations
+   9.12 Deduplication
+   9.13 Sampling, Generation & Limiting
+   9.14 Readers
+   9.15 Writers
+   9.16 Lookup Files & BC Lookups
+   9.17 Database Components
+   9.18 Queues, Publish/Subscribe & Messaging
+   9.19 Service Calls & External Programs
+   9.20 File System & Transfer Operations
+   9.21 Compression & Encryption
+   9.22 Validation, Testing & Diagnostics
+   9.23 Internal Runtime, Continuous Flow & Tiled Infrastructure
+10. DML BASICS & KEY SPECIFIER
+    10.1 DML Basics
+    10.2 Key Specifier
+    10.3 Common DML Expressions
+11. INTERPRETATION ALGORITHM
+12. OUTPUT CONTRACT
+    12.1 Parsed Job (YAML Format)
+    12.2 Explanation (Plain Language)
+13. WORKED EXAMPLE
+14. EDGE CASES & UNKNOWN HANDLING
+15. COMMON MISINTERPRETATIONS
+16. SELF-CHECK BEFORE ANSWERING
+17. CHANGELOG
+18. CONVERSION WORKFLOW & PARAMETERS
+    18.1 Conversion Methods
+    18.2 Technical Document Structure
+    18.3 Effort Levels
+    18.4 Configurable Parameters
+        18.4.1 Required Parameters
+        18.4.2 Optional Parameters
+    18.5 Execution Steps For The LLM
 
 # MP HELP SKILL — interpreting Ab Initio `mp` commands
 
