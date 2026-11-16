@@ -1173,3 +1173,88 @@ Summary: from the day's transaction file and the customer file, the job writes o
 | v2 (skill_file_v1) | Command inventory (~120 commands), layout as topology; no meanings per option |
 | v3.x (mp_runtime_skill_v3.md) | Full inventory with conversion mappings |
 | v1.2 | Interpretation-only help: all 438 commands with exact usage, class and meaning; all 308 options; execution, ports, phases, rejects, DML basics, worked reading of a script; no target-language code |
+
+## 18. CONVERSION WORKFLOW & PARAMETERS
+ 
+This section defines how a copilot or LLM chat should use this skill file to convert an Ab Initio artifact.
+ 
+### 18.1 Conversion Methods
+ 
+| Method | Outputs | When to use |
+|--------|---------|-------------|
+| `code_to_doc_to_code` | **Output 1:** Technical interpretation document (§18.2) → **wait for user confirmation** → **Output 2:** PySpark code | Complex artifacts, audit trail needed, user wants to review logic before code |
+| `code_to_code` | **Output 1:** PySpark code (with business summary as top comments) | Simple artifacts, fast turnaround, user already understands the artifact |
+ 
+### 18.2 Technical Document Structure (Output 1)
+ 
+When method = `code_to_doc_to_code`, produce these 12 sections in order:
+ 
+| # | Section | Content |
+|---|---------|---------|
+| 1 | Overview | One paragraph: what the job does, reads, produces |
+| 2 | Parameters & Environment | Table: all `$VAR`, sourced files, script args — resolved vs unresolved |
+| 3 | Pre-job Steps | Shell commands before `mp job` — purpose and order |
+| 4 | Job Definition | Name, layouts, all metadata with DML parsed into field-level tables |
+| 5 | Datasets | Table: name, direction (in/out/io), URLs, format, codec, write mode, multifile |
+| 6 | Component Graph | Per phase, per component in data-flow order: command, class (§7), positional args, data-affecting options (§8), runtime-only options (marked), port connections, reject threshold formula, one-line business meaning |
+| 7 | Flow Map | Every flow: name, type, from-port, to-port, metadata — grouped by phase |
+| 8 | Data Lineage | Source-to-target field trace where transforms/xfr are available |
+| 9 | Side Effects | Ordered list of all non-data operations (deletes, truncates, SQL, mail, renames) |
+| 10 | Critical Semantics | NULL join behavior, dedup survivor rules, sort-dependent logic, reject routing, conditionals |
+| 11 | Unresolved Items | Unknown commands, unresolved variables, missing transforms, credentials detected |
+| 12 | Conversion Notes | What maps cleanly, what needs manual work, what gets dropped |
+ 
+### 18.3 Effort Levels
+ 
+| Aspect | Low | Medium (default) | High |
+|--------|-----|-------------------|------|
+| Schema | Comments only, `inferSchema` | Full `StructType` from DML | Full `StructType` + nullability + constraints |
+| Reject/deselect | Skip unless port explicitly connected | Enforce thresholds; write deselect if connected | Full enforcement + per-field DQ checks |
+| External transforms (`.xfr`) | `# TODO: implement` stub | Stub with field-level mapping comments | Parse `.xfr` bodies into Column expressions |
+| Error handling | Minimal | Basic try/except | Comprehensive with cleanup |
+| Logging | None | `logging.info` phase start/end | Structured with counts per step |
+| Reconciliation | None | None | Count + checksum source vs target |
+| Config | Hardcoded paths OK | `argparse` for unresolved vars | Config-driven, zero hardcoded strings |
+| Write pattern | As-is | As-is | Idempotent (overwrite/merge) for safe reruns |
+| Documentation | None | Inline comments | Docstrings on every function |
+ 
+### 18.4 Configurable Parameters
+ 
+The user fills these in before submitting. Defaults in **bold**.
+ 
+**Required:**
+ 
+| Parameter | Default | Options | Description |
+|-----------|---------|---------|-------------|
+| Artifact name | *(required)* | free text | Filename of the Ab Initio artifact being converted |
+| Artifact type | **wrapper_script** | `wrapper_script`, `graph_export`, `graph_serialized`, `mp_fragment` | Input format so the LLM knows what to expect |
+| Skill file name | **mp_runtime_skill_v3.md** | any skill file name | Which attached file is the command knowledge base |
+| Conversion effort | **medium** | `low`, `medium`, `high` | Controls code completeness per §18.3 |
+| Conversion method | **code_to_doc_to_code** | `code_to_doc_to_code`, `code_to_code` | Two outputs (doc → code) or one output (code only) |
+ 
+**Optional:**
+ 
+| Parameter | Default | Options | Description |
+|-----------|---------|---------|-------------|
+| Target Spark version | **3.3+** | `3.3+`, `3.5+`, `4.0+` | Controls which Spark APIs are available |
+| Output format | **single_module** | `single_module`, `multi_file`, `notebook` | One `.py`, separate files per phase, or Jupyter |
+| Naming convention | **snake_case** | `snake_case`, `camelCase`, `original_names` | How to name functions/variables/DataFrames |
+| File format handling | **auto_detect** | `auto_detect`, `force_csv`, `force_parquet`, `force_delta` | Override output file formats |
+| Write mode override | **preserve_original** | `preserve_original`, `overwrite`, `merge_upsert` | Override write modes from artifact |
+| Reconciliation checks | **no** | `yes`, `no` | Add count/checksum validation at end |
+| Logging | **basic** | `none`, `basic`, `structured` | Logging verbosity in generated code |
+| Config management | **argparse** | `argparse`, `dict`, `dataclass`, `env_vars` | How unresolved params are managed in code |
+| External transform handling | **stub_with_todo** | `stub_with_todo`, `inline_if_provided`, `raise_error` | What to do with `.xfr` references |
+| Reject file output | **write_if_connected** | `write_if_connected`, `always_write`, `skip` | When to write reject DataFrames |
+| Additional instructions | *(empty)* | free text | Extra requirements, naming patterns, target paths, business context |
+ 
+### 18.5 Execution Steps for the LLM
+ 
+```text
+1. Read the ENTIRE skill file — §0 Golden Rules, §7 Classification, §9 Command Catalog
+2. Read the artifact top to bottom
+3. Look up EVERY mp command in §9; classify per §7
+4. IF method = code_to_doc_to_code → produce Output 1 (§18.2), WAIT for confirmation
+5. Generate PySpark per §12 algorithm, §13 output contract, effort level (§18.3)
+6. Apply optional parameters where relevant
+7. Run self-check (§17) before delivering
