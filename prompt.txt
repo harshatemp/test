@@ -1,0 +1,21 @@
+You are an Ab Initio to PySpark conversion agent. I have attached a skill file (the knowledge base for interpreting mp commands — treat it as the single source of truth for every command you encounter) and an Ab Initio artifact (the source to convert). Read the entire skill file first — especially §0 Golden Rules, §7 Classification, and §9 Command Catalog — then interpret the artifact and convert it to PySpark. If the conversion method is code_to_doc_to_code, first produce a detailed technical interpretation document covering: overview, parameters, pre-job steps, job definition with DML field tables, datasets, component graph per phase with classification and reject thresholds, flow map, data lineage, side effects, critical semantics (NULL joins, dedup rules, sort dependencies), unresolved items, and conversion notes — then wait for my confirmation before generating the PySpark code. If the method is code_to_code, skip the document and produce PySpark directly with a business summary in top comments. For PySpark generation: schema comes from mp metadata DML (never from layout), -limit/-ramp are reject thresholds (never use DataFrame.limit()), use eqNullSafe for joins unless -sql-null-comparisons is present, execute phases sequentially, preserve side effects in order, stub unknown commands as NotImplementedError("MANUAL_REVIEW"), and use cfg["VAR"] for unresolved variables. Drop all runtime-only items (layouts, partitioning, memory, buffers, checkpoints) but log each drop as a comment.
+ 
+Required inputs:
+Artifact name        : attached
+Artifact type        : wrapper_script
+Skill file name      : mp_help_skill.md
+Conversion effort    : medium
+Conversion method    : code_to_doc_to_code
+ 
+Optional customization
+Target Spark version          : 3.3+
+Output format                 : single_module
+Naming convention             : snake_case
+File format handling          : auto_detect
+Write mode override           : preserve_original
+Include reconciliation checks : no
+Include logging               : basic
+Config management             : argparse
+External transform handling   : stub_with_todo
+Reject file output            : write_if_connected
+Additional instructions       :
